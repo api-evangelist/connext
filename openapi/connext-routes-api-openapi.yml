@@ -1,0 +1,204 @@
+openapi: 3.0.1
+info:
+  title: Chimera Routes API
+  version: 1.0.0
+servers:
+- url: https://api.testnet.everclear.org
+- url: https://api.everclear.org
+tags:
+- name: Routes
+paths:
+  /routes/quotes:
+    post:
+      summary: Get quote for a route, including fees and limits
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - origin
+              - destinations
+              - inputAsset
+              - amount
+              properties:
+                origin:
+                  type: string
+                destinations:
+                  type: array
+                  items:
+                    type: string
+                  nullable: false
+                inputAsset:
+                  type: string
+                outputAsset:
+                  type: string
+                amount:
+                  type: string
+                  description: Token amount, denominated in the asset's decimal units on the origin chain
+                to:
+                  type: string
+                from:
+                  type: string
+                  description: intent creator address
+                order_id:
+                  type: string
+                  description: Order ID for newOrder requests
+      responses:
+        '200':
+          description: Successfully retrieved quote.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - fixedFeeUnits
+                - variableFeeBps
+                - totalFeeBps
+                - currentLimit
+                - reqType
+                - splitCount
+                - expectedAmount
+                properties:
+                  fixedFeeUnits:
+                    type: string
+                    format: float
+                    description: Fixed fee in token units.
+                  variableFeeBps:
+                    type: number
+                    format: float
+                    description: Variable fee in basis points.
+                  totalFeeBps:
+                    type: number
+                    format: float
+                    description: Total fee in basis points given the amount.
+                  expectedAmount:
+                    type: string
+                    format: float
+                    description: Expected amount after fees are deducted.
+                  currentLimit:
+                    type: string
+                    format: float
+                    description: Current limit in token amount.
+                  splitCount:
+                    type: integer
+                    description: Number of splits for the intent
+                  reqType:
+                    type: string
+                    description: Type of quote operation. 'bridge' | 'swap' | 'x-swap' | 'invalid'
+                  fastPathQuote:
+                    description: Fast path quote details if fast path is available, or error message if over limit
+                    anyOf:
+                    - type: object
+                      description: Fast path quote details
+                      required:
+                      - fixedFeeUnits
+                      - variableFeeBps
+                      - totalFeeBps
+                      - expectedAmount
+                      properties:
+                        fixedFeeUnits:
+                          type: string
+                          format: float
+                          description: Fixed fee in token units for fast path.
+                        variableFeeBps:
+                          type: number
+                          format: float
+                          description: Variable fee in basis points for fast path.
+                        totalFeeBps:
+                          type: number
+                          format: float
+                          description: Total fee in basis points for fast path.
+                        expectedAmount:
+                          type: string
+                          format: float
+                          description: Expected amount after fast path fees are deducted.
+                        expectedFillTime:
+                          type: string
+                          format: number
+                          description: Expected time to get fast path intent filled by solver
+                    - type: object
+                      description: Error message when fast path is over limit
+                      required:
+                      - message
+                      properties:
+                        message:
+                          type: string
+                          description: Error message indicating the amount is over the fast path limit.
+                  settlementEstimate:
+                    anyOf:
+                    - type: object
+                      required:
+                      - p25Minutes
+                      - p50Minutes
+                      - p75Minutes
+                      properties:
+                        p25Minutes:
+                          type: number
+                          format: float
+                          description: Estimated settlement time in minutes.
+                        p50Minutes:
+                          type: number
+                          format: float
+                          description: Estimated settlement time in minutes.
+                        p75Minutes:
+                          type: number
+                          format: float
+                          description: Estimated settlement time in minutes.
+                    - type: object
+                      required:
+                      - message
+                      properties:
+                        message:
+                          type: string
+                          description: Error message if no estimate is available.
+        '400':
+          description: Invalid request parameters.
+        '500':
+          description: Internal server error.
+      tags:
+      - Routes
+  /routes/limits:
+    post:
+      summary: Get current limits for a route
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - origin
+              - destinations
+              - inputAsset
+              properties:
+                origin:
+                  type: string
+                destinations:
+                  type: array
+                  items:
+                    type: string
+                  nullable: false
+                inputAsset:
+                  type: string
+      responses:
+        '200':
+          description: Successfully retrieved limits.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - currentLimit
+                properties:
+                  currentLimit:
+                    type: string
+                    format: float
+                    description: Current limit in token's native decimal units.
+        '400':
+          description: Invalid request parameters.
+        '500':
+          description: Internal server error.
+      tags:
+      - Routes

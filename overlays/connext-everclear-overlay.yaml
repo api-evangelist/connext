@@ -1,0 +1,104 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Everclear (Chimera) API
+  version: 1.0.0
+extends: openapi/connext-everclear-openapi.yml
+x-provenance:
+  generated: '2026-08-09'
+  method: generated
+  source: >-
+    Derived from openapi/connext-everclear-openapi.yml — the verbatim merge of the 17
+    per-endpoint OpenAPI documents Everclear publishes at
+    https://docs.everclear.org/developers/api.md. Everclear left operationId and tags off 14
+    of its 17 operations; this overlay supplies them without mutating the harvested spec, and
+    stamps the host status observed on 2026-08-09.
+  note: >-
+    operationIds below are API Evangelist conventions, NOT provider-published identifiers. The
+    only three operationIds Everclear actually published (callNewIntentSolana,
+    createSolanaLookupTable, callNewIntentTron) are preserved as-is and are not re-targeted here.
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-profile: https://apis.io/providers/connext/
+      x-status: sunset
+      x-status-note: >-
+        The Everclear protocol was sunset on 2026-05-21. https://api.everclear.org returned
+        HTTP 530 and https://api.testnet.everclear.org accepted no connection on 2026-08-09.
+        This contract is archival.
+  - target: $.servers[0]
+    update:
+      x-host-status: unreachable
+      x-host-checked: '2026-08-09'
+      x-host-http-status: 0
+      description: Testnet API (no TCP connection completes as of 2026-08-09)
+  - target: $.servers[1]
+    update:
+      x-host-status: unreachable
+      x-host-checked: '2026-08-09'
+      x-host-http-status: 530
+      description: Production API (Cloudflare returns 530 — origin unreachable as of 2026-08-09)
+  - target: $.paths['/intents'].post
+    update:
+      operationId: createIntents
+      tags: [Intents]
+  - target: $.paths['/intents'].get
+    update:
+      operationId: listIntents
+      tags: [Intents]
+  - target: $.paths['/intents/{intentId}'].get
+    update:
+      operationId: getIntent
+      tags: [Intents]
+  - target: $.paths['/intents/{intentId}/execute'].post
+    update:
+      operationId: executeIntentCalldata
+      tags: [Intents]
+  - target: $.paths['/intents/{intentId}/return-unsupported'].post
+    update:
+      operationId: returnUnsupportedIntent
+      tags: [Intents]
+  - target: $.paths['/batched-intents'].get
+    update:
+      operationId: listBatchedIntents
+      tags: [Intents]
+  - target: $.paths['/batched-intents/{batchId}'].get
+    update:
+      operationId: getBatchedIntents
+      tags: [Intents]
+  - target: $.paths['/solana/intents'].post
+    update:
+      tags: [Intents, Solana]
+  - target: $.paths['/solana/create-lookup-table'].post
+    update:
+      tags: [Solana]
+  - target: $.paths['/tron/intents'].post
+    update:
+      tags: [Intents, Tron]
+  - target: $.paths['/invoices'].get
+    update:
+      operationId: listInvoices
+      tags: [Invoices]
+  - target: $.paths['/invoices/{intentId}'].get
+    update:
+      operationId: getInvoice
+      tags: [Invoices]
+  - target: $.paths['/invoices/{intentId}/min-amounts'].get
+    update:
+      operationId: getInvoiceMinAmounts
+      tags: [Invoices]
+  - target: $.paths['/configs/assets'].get
+    update:
+      operationId: listSupportedAssets
+      tags: [Configuration]
+  - target: $.paths['/routes/quotes'].post
+    update:
+      operationId: getRouteQuote
+      tags: [Routes]
+  - target: $.paths['/routes/limits'].post
+    update:
+      operationId: getRouteLimits
+      tags: [Routes]
+  - target: $.paths['/history/{intentId}/invoice-processing'].get
+    update:
+      operationId: getInvoiceProcessingHistory
+      tags: [History]

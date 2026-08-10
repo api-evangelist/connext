@@ -1,0 +1,114 @@
+generated: '2026-08-09'
+method: derived
+source: openapi/connext-everclear-openapi.yml
+format: custom
+rfc9457: false
+envelope:
+  media_type: application/json
+  schema:
+    type: object
+    properties:
+      error: {type: string}
+      message: {type: string}
+  note: >-
+    Everclear returns a flat {error, message} JSON object, not RFC 9457
+    application/problem+json. There is no type URI, no instance, no trace/request id, and no
+    machine-readable error code — an agent has to string-match the message. Three operations
+    (POST /routes/quotes, POST /routes/limits, GET /history/{intentId}/invoice-processing)
+    declare their 4xx/5xx responses with a description only and no schema at all, so even the
+    envelope is not guaranteed there.
+problems:
+  - status: 400
+    title: Invalid input
+    detail: Request body or query parameters failed validation.
+    source_operations:
+      - POST /intents
+      - GET /intents
+      - GET /batched-intents
+      - GET /batched-intents/{batchId}
+      - POST /intents/{intentId}/execute
+      - POST /intents/{intentId}/return-unsupported
+      - GET /invoices
+      - GET /invoices/{intentId}/min-amounts
+  - status: 400
+    title: Invalid Intent ID
+    detail: The supplied intentId path parameter is not a valid intent identifier.
+    source_operations:
+      - GET /intents/{intentId}
+      - GET /invoices/{intentId}
+  - status: 400
+    title: Invalid Request
+    detail: Malformed request to the asset configuration endpoint.
+    source_operations:
+      - GET /configs/assets
+  - status: 400
+    title: Invalid request parameters.
+    detail: Route quote/limit request parameters failed validation.
+    source_operations:
+      - POST /routes/quotes
+      - POST /routes/limits
+    schema_declared: false
+  - status: 400
+    title: Invalid chain or asset parameter.
+    detail: The chain or asset supplied to the invoice-processing history endpoint is not recognised.
+    source_operations:
+      - GET /history/{intentId}/invoice-processing
+    schema_declared: false
+  - status: 400
+    title: Registries not found and deployed for given domain
+    detail: >-
+      No Everclear contract registry is deployed for the requested domain (chain). Note that
+      Everclear returns this same description under 400, 404 AND 500 on the Solana and Tron
+      intent endpoints — the status code does not disambiguate the condition.
+    source_operations:
+      - POST /solana/intents
+      - POST /solana/create-lookup-table
+      - POST /tron/intents
+  - status: 404
+    title: Registries not found and deployed for given domain
+    detail: No Everclear contract registry is deployed for the requested origin/destination domain.
+    source_operations:
+      - POST /intents
+      - POST /solana/intents
+      - POST /solana/create-lookup-table
+      - POST /tron/intents
+  - status: 500
+    title: Server error
+    detail: Unhandled server-side failure.
+    source_operations:
+      - POST /intents
+      - GET /intents
+      - GET /batched-intents
+      - GET /batched-intents/{batchId}
+      - GET /intents/{intentId}
+      - POST /intents/{intentId}/execute
+      - POST /intents/{intentId}/return-unsupported
+      - GET /invoices
+      - GET /invoices/{intentId}
+      - GET /invoices/{intentId}/min-amounts
+      - GET /configs/assets
+  - status: 500
+    title: Internal server error.
+    detail: Unhandled server-side failure (routes and history endpoints).
+    source_operations:
+      - POST /routes/quotes
+      - POST /routes/limits
+      - GET /history/{intentId}/invoice-processing
+    schema_declared: false
+  - status: 500
+    title: Registries not found and deployed for given domain
+    detail: >-
+      Declared as a 500 on the non-EVM intent endpoints with the same description used for
+      their 400 and 404 — an unresolved inconsistency in the published contract.
+    source_operations:
+      - POST /solana/intents
+      - POST /solana/create-lookup-table
+      - POST /tron/intents
+gaps:
+  - No 401/403 responses anywhere — consistent with an unauthenticated API.
+  - No 429 / rate-limit response declared on any operation.
+  - No stable error code vocabulary; only free-text error/message strings.
+  - The same description is reused across 400, 404 and 500 on three operations.
+caveat: >-
+  Derived from the published contract only. https://api.everclear.org returned HTTP 530 on
+  2026-08-09, so no live error response could be observed. See lifecycle/connext-lifecycle.yml.

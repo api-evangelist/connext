@@ -1,0 +1,182 @@
+openapi: 3.0.1
+info:
+  title: Chimera Tron API
+  version: 1.0.0
+servers:
+- url: https://api.testnet.everclear.org
+- url: https://api.everclear.org
+tags:
+- name: Tron
+paths:
+  /tron/intents:
+    post:
+      summary: Create a new intent on Tron
+      description: Submits a new intent transaction to the Tron blockchain using the specified parameters and configuration.
+      operationId: callNewIntentTron
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - origin
+              - destinations
+              - to
+              - inputAsset
+              - amount
+              - callData
+              properties:
+                origin:
+                  type: string
+                destinations:
+                  type: array
+                  items:
+                    type: string
+                  nullable: false
+                to:
+                  type: string
+                from:
+                  type: string
+                  description: intent creator address
+                inputAsset:
+                  type: string
+                outputAsset:
+                  type: string
+                amount:
+                  type: string
+                  format: bigint
+                  description: Input asset amount, denominated in the asset's decimal units on the origin chain
+                callData:
+                  type: string
+                ttl:
+                  type: integer
+                  description: Time-to-live in seconds for fast-path execution (optional)
+                max_fee:
+                  type: string
+                  description: Max Fees used in intent system (depricated after swaps)
+                permit2Params:
+                  type: object
+                  properties:
+                    nonce:
+                      type: string
+                      format: bigint
+                    deadline:
+                      type: string
+                      format: bigint
+                    signature:
+                      type: string
+                  required:
+                  - nonce
+                  - deadline
+                  - signature
+                order_id:
+                  type: string
+                  description: Order ID for newOrder requests
+                isFastPath:
+                  type: boolean
+                  description: Boolean for sending intent through fast path
+      responses:
+        '200':
+          description: Successfully created intent transaction
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionRequest'
+        '400':
+          description: Registries not found and deployed for given domain
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '404':
+          description: Registries not found and deployed for given domain
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Registries not found and deployed for given domain
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+      tags:
+      - Tron
+components:
+  schemas:
+    TransactionRequest:
+      type: object
+      properties:
+        to:
+          type: string
+          nullable: true
+        from:
+          type: string
+          nullable: true
+        nonce:
+          type: string
+          format: bigint
+        gasLimit:
+          type: string
+          format: bigint
+        gasPrice:
+          type: string
+          format: bigint
+        data:
+          type: string
+          format: byte
+        value:
+          type: string
+          format: bigint
+        chainId:
+          type: integer
+        type:
+          type: integer
+          nullable: true
+        accessList:
+          type: array
+          items:
+            type: object
+            properties:
+              address:
+                type: string
+              storageKeys:
+                type: array
+                items:
+                  type: string
+          nullable: true
+        maxPriorityFeePerGas:
+          type: string
+          format: bigint
+          nullable: true
+        maxFeePerGas:
+          type: string
+          format: bigint
+          nullable: true
+        customData:
+          type: object
+          additionalProperties: true
+          nullable: true
+        ccipReadEnabled:
+          type: boolean
+          nullable: true
+      required:
+      - to
+      - data
+      - chainId

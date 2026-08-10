@@ -1,0 +1,102 @@
+openapi: 3.0.1
+info:
+  title: Chimera History API
+  version: 1.0.0
+servers:
+- url: https://api.testnet.everclear.org
+- url: https://api.everclear.org
+tags:
+- name: History
+paths:
+  /history/{intentId}/invoice-processing:
+    get:
+      summary: Get history of invoice processing
+      description: Retrieves detailed history of a specific invoice, including epochs and details of processing as deposit and invoice.
+      parameters:
+      - in: path
+        name: intentId
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the intent.
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+      responses:
+        '200':
+          description: Successful response with history of invoice processing
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - invoiceProcessingHistory
+                - nextCursor
+                properties:
+                  invoiceProcessingHistory:
+                    type: array
+                    description: Array containing history records of invoice processing.
+                    items:
+                      type: object
+                      required:
+                      - epoch
+                      - domain
+                      - custodiedAssets
+                      - amountToBeDiscounted
+                      - rewardsForDepositors
+                      - amountAfterDiscount
+                      - discountdbps
+                      - selectedDestinationDomain
+                      - selectedDestinationDomainLiquidity
+                      - timestamp
+                      properties:
+                        epoch:
+                          type: integer
+                          description: Epoch in which the processing took place.
+                        domain:
+                          type: integer
+                          description: Domain identifier for the processing step.
+                        custodiedAssets:
+                          type: number
+                          format: float
+                          description: Total assets custodied during the epoch.
+                        amountToBeDiscounted:
+                          type: number
+                          format: float
+                          description: Amount of assets subject to discount.
+                        rewardsForDepositors:
+                          type: number
+                          format: float
+                          description: Rewards allocated for depositors.
+                        amountAfterDiscount:
+                          type: number
+                          format: float
+                          description: Total amount after applying discounts.
+                        discountdbps:
+                          type: integer
+                          description: Discount basis points applied.
+                        selectedDestinationDomain:
+                          type: integer
+                          description: Selected destination domain for the intent.
+                        selectedDestinationDomainLiquidity:
+                          type: number
+                          format: float
+                          description: Liquidity available in the selected destination domain.
+                        timestamp:
+                          type: string
+                  nextCursor:
+                    type: string
+                    nullable: true
+        '400':
+          description: Invalid chain or asset parameter.
+        '500':
+          description: Internal server error.
+      tags:
+      - History

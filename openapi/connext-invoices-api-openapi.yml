@@ -1,0 +1,288 @@
+openapi: 3.0.1
+info:
+  title: Chimera Invoices API
+  version: 1.0.0
+servers:
+- url: https://api.testnet.everclear.org
+- url: https://api.everclear.org
+tags:
+- name: Invoices
+paths:
+  /invoices:
+    get:
+      summary: Get invoices
+      description: Retrieves a paginated list of invoices in FIFO queue order
+      parameters:
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: prevCursor
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        default: 10
+      - in: query
+        name: tickerHash
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: origins
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: destinations
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: sortOrderByDiscount
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful retrieval of invoices
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - invoices
+                - nextCursor
+                - maxCount
+                - prevCursor
+                properties:
+                  invoices:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Invoice'
+                  nextCursor:
+                    type: string
+                    required: true
+                    nullable: true
+                  prevCursor:
+                    type: string
+                    required: true
+                    nullable: true
+                  maxCount:
+                    type: number
+                    required: true
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+      tags:
+      - Invoices
+  /invoices/{intentId}:
+    get:
+      summary: Return invoice details
+      description: Fetches detailed information for a specified invoice by its intentID
+      parameters:
+      - in: path
+        name: intentId
+        required: true
+        schema:
+          type: string
+          description: The unique identifier for the intent
+      responses:
+        '200':
+          description: Successful retrieval of invoice details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invoice:
+                    $ref: '#/components/schemas/Invoice'
+        '400':
+          description: Invalid Intent ID
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+      tags:
+      - Invoices
+  /invoices/{intentId}/min-amounts:
+    get:
+      summary: Calculate minimum amounts needed to settle invoice
+      description: Calculates the minimum amounts per destination domain to settle a specified invoice. This returns a map of destination domain to minimum amount required in standardized 1e18 decimals.
+      parameters:
+      - in: path
+        name: intentId
+        required: true
+        schema:
+          type: string
+          description: The unique identifier for the invoice intent
+      responses:
+        '200':
+          description: Successful calculation of minimum amounts
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - invoiceAmount
+                - amountAfterDiscounts
+                - discountBps
+                - custodiedAmounts
+                - minAmounts
+                properties:
+                  invoiceAmount:
+                    type: string
+                    description: Original invoice amount before discount
+                  amountAfterDiscounts:
+                    type: object
+                    additionalProperties:
+                      type: string
+                    description: Map of domain to amount after applying the discount
+                  discountBps:
+                    type: string
+                    description: Current discount in basis points
+                  custodiedAmounts:
+                    type: object
+                    additionalProperties:
+                      type: string
+                    description: Map of domain to custodied amount
+                  minAmounts:
+                    type: object
+                    additionalProperties:
+                      type: string
+                    description: Map of domain to minimum required amount
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+      tags:
+      - Invoices
+components:
+  schemas:
+    IntentStatus:
+      type: string
+      enum:
+      - NONE
+      - ADDED
+      - ADDED_SPOKE
+      - ADDED_HUB
+      - DEPOSIT_PROCESSED
+      - FILLED
+      - ADDED_AND_FILLED
+      - INVOICED
+      - SETTLED
+      - SETTLED_AND_COMPLETED
+      - SETTLED_AND_MANUALLY_EXECUTED
+      - UNSUPPORTED
+      - UNSUPPORTED_RETURNED
+      - DISPATCHED_HUB
+      - DISPATCHED_SPOKE
+      - DISPATCHED_UNSUPPORTED
+    Invoice:
+      type: object
+      required:
+      - intent_id
+      - owner
+      - entry_epoch
+      - amount
+      - discount
+      - origin
+      - destinations
+      - ticker_hash
+      - hub_invoice_enqueued_timestamp
+      - discountBps
+      properties:
+        intent_id:
+          type: string
+          description: A string representing the intent ID
+        owner:
+          type: string
+          description: Invoice owner address
+        entry_epoch:
+          type: integer
+          format: int64
+          description: The epoch when the invoice was created
+        amount:
+          type: string
+          description: Amount of the invoice
+        discountBps:
+          type: integer
+          format: int64
+          description: The current discount of the invoice in BPS
+        origin:
+          type: string
+        destinations:
+          type: array
+          items:
+            type: string
+        hub_status:
+          $ref: '#/components/schemas/IntentStatus'
+          description: The status of the intent on Hub domain
+          nullable: true
+        ticker_hash:
+          type: string
+        hub_invoice_enqueued_timestamp:
+          type: string

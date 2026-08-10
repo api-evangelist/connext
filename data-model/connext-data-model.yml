@@ -1,0 +1,167 @@
+generated: '2026-08-09'
+method: derived
+source: >-
+  openapi/connext-everclear-openapi.yml (components.schemas + path parameters),
+  graphql/connext-everclear-subgraph.graphql (published subgraph entities)
+summary: >-
+  Everclear's object graph has one root entity — the Intent — and everything else hangs off
+  it. An Intent is a rebalancing request submitted on an origin domain for settlement on one
+  or more destination domains. When an intent cannot be netted immediately it becomes an
+  Invoice, which is discounted per epoch until another intent buys it. Assets are identified
+  canonically across domains; TransactionRequest is not a stored entity at all but the
+  unsigned calldata the API hands back to the caller.
+entities:
+  - name: Intent
+    schema: '#/components/schemas/Intent'
+    id_field: intent_id
+    description: A rebalancing/settlement request. The root object of the protocol.
+    key_fields:
+      - intent_id
+      - batch_id
+      - queue_idx
+      - message_id
+      - status (IntentStatus)
+      - receiver
+      - input_asset
+      - output_asset
+    read_operations:
+      - GET /intents
+      - GET /intents/{intentId}
+    write_operations:
+      - POST /intents
+      - POST /solana/intents
+      - POST /tron/intents
+  - name: IntentRequest
+    schema: '#/components/schemas/IntentRequest'
+    description: >-
+      The request body used to build an intent. Carries origin, destinations, to, from,
+      inputAsset, outputAsset, amount, callData, ttl, max_fee, order_id, isFastPath and an
+      optional permit2Params block.
+    write_operations:
+      - POST /intents
+      - POST /solana/intents
+      - POST /tron/intents
+  - name: TransactionRequest
+    schema: '#/components/schemas/TransactionRequest'
+    description: >-
+      Not a persisted resource — the unsigned EVM transaction (to, from, data, value,
+      chainId, gas fields, accessList) returned for the caller to sign locally.
+    returned_by:
+      - POST /intents
+      - POST /solana/intents
+      - POST /solana/create-lookup-table
+      - POST /tron/intents
+      - POST /intents/{intentId}/execute
+      - POST /intents/{intentId}/return-unsupported
+  - name: Invoice
+    schema: '#/components/schemas/Invoice'
+    id_field: intent_id
+    description: >-
+      An intent that entered the hub queue unnetted. Carries owner, entry_epoch, amount,
+      discount/discountBps, origin, destinations, ticker_hash and
+      hub_invoice_enqueued_timestamp.
+    read_operations:
+      - GET /invoices
+      - GET /invoices/{intentId}
+      - GET /invoices/{intentId}/min-amounts
+  - name: Asset
+    schema: '#/components/schemas/Asset'
+    id_field: id
+    description: >-
+      A token as it exists on one domain — local, adopted, canonical_id, canonical_domain,
+      domain, key, decimal, adopted_decimal.
+    read_operations:
+      - GET /configs/assets
+  - name: Batch
+    description: >-
+      A group of intents dispatched together, keyed by batchId with token_fee and native_fee.
+      Declared inline in the /batched-intents responses rather than as a named schema.
+    id_field: batchId
+    read_operations:
+      - GET /batched-intents
+      - GET /batched-intents/{batchId}
+  - name: InvoiceProcessingHistory
+    description: >-
+      Per-epoch record of how an invoice was processed — epoch, domain, custodiedAssets,
+      amountToBeDiscounted, rewardsForDepositors, amountAfterDiscount, discountdbps,
+      selectedDestinationDomain. Declared inline.
+    read_operations:
+      - GET /history/{intentId}/invoice-processing
+  - name: RouteQuote
+    description: >-
+      Fee and limit quote for an origin/destinations/asset route — fixedFeeUnits,
+      variableFeeBps, totalFeeBps, currentLimit, reqType, splitCount, expectedAmount.
+      Declared inline, computed not stored.
+    write_operations:
+      - POST /routes/quotes
+      - POST /routes/limits
+relationships:
+  - from: Intent
+    to: Batch
+    type: belongs_to
+    via: batch_id
+  - from: Batch
+    to: Intent
+    type: has_many
+    via: intents[]
+  - from: Invoice
+    to: Intent
+    type: belongs_to
+    via: intent_id
+    note: An Invoice is keyed by the intent it was created from — a 1:1 projection, not a separate id space.
+  - from: Invoice
+    to: InvoiceProcessingHistory
+    type: has_many
+    via: intentId path parameter on GET /history/{intentId}/invoice-processing
+  - from: Intent
+    to: Asset
+    type: has_one
+    via: input_asset
+  - from: Intent
+    to: Asset
+    type: has_one
+    via: output_asset
+  - from: Invoice
+    to: Asset
+    type: belongs_to
+    via: ticker_hash
+  - from: Asset
+    to: Asset
+    type: belongs_to
+    via: canonical_id + canonical_domain
+    note: Every per-domain asset row points back to one canonical asset identity.
+  - from: Intent
+    to: TransactionRequest
+    type: has_one
+    via: returned by the intent-building POSTs; not persisted
+enumerations:
+  IntentStatus:
+    source: '#/components/schemas/IntentStatus'
+    values:
+      - NONE
+      - ADDED
+      - ADDED_SPOKE
+      - ADDED_HUB
+      - DEPOSIT_PROCESSED
+      - FILLED
+      - ADDED_AND_FILLED
+      - INVOICED
+      - SETTLED
+      - SETTLED_AND_COMPLETED
+      - SETTLED_AND_MANUALLY_EXECUTED
+      - UNSUPPORTED
+      - UNSUPPORTED_RETURNED
+      - DISPATCHED_HUB
+      - DISPATCHED_SPOKE
+      - DISPATCHED_UNSUPPORTED
+    note: >-
+      The REST IntentStatus enum (16 values) is a superset of the subgraph IntentStatus enum
+      (5 values: NONE, ADDED, DISPATCHED, SETTLED, SETTLED_AND_MANUALLY_EXECUTED) and of the
+      subgraph HubIntentStatus enum (10 values). The three vocabularies do not line up — a
+      real divergence between the REST projection and the indexed on-chain projection.
+subgraph_entities:
+  source: graphql/connext-everclear-subgraph.graphql
+  spoke: [OriginIntent, DestinationIntent, IntentSettleEvent, Queue]
+  hub: [HubIntent, SettlementQueue, SettlementMessage, Token, Asset, Solver]
+caveat: >-
+  Derived only. No live host was reachable on 2026-08-09 to sample real objects.

@@ -1,0 +1,693 @@
+openapi: 3.0.1
+info:
+  title: Chimera Intents API
+  version: 1.0.0
+servers:
+- url: https://api.testnet.everclear.org
+- url: https://api.everclear.org
+tags:
+- name: Intents
+paths:
+  /intents:
+    post:
+      summary: Create new intent(s)
+      description: Endpoint to generate a TransactionRequest for one or multiple intents. For multiple intents, the transaction will target a fee adapter contract with appropriately formatted calldata.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - $ref: '#/components/schemas/IntentRequest'
+              - type: array
+                items:
+                  $ref: '#/components/schemas/IntentRequest'
+      responses:
+        '200':
+          description: Successful response with a TransactionRequest object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionRequest'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '404':
+          description: Registries not found and deployed for given domain
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+      tags:
+      - Intents
+    get:
+      summary: Get intents
+      description: Retrieves a paginated list of intents based on query parameters
+      parameters:
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: prevCursor
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        default: 10
+      - in: query
+        name: statuses
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: origins
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: destinations
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: allDestinations
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: txHash
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: userAddress
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: startDate
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: endDate
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: tickerHash
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: isFastPath
+        required: false
+        schema:
+          type: boolean
+        description: Filter for fast path intents (intents with TTL > 0)
+      responses:
+        '200':
+          description: Successful retrieval of intents
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - intents
+                - nextCursor
+                - maxCount
+                - prevCursor
+                properties:
+                  intents:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Intent'
+                  nextCursor:
+                    type: string
+                    required: true
+                    nullable: true
+                  prevCursor:
+                    type: string
+                    required: true
+                    nullable: true
+                  maxCount:
+                    type: number
+                    required: true
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+      tags:
+      - Intents
+  /intents/{intentId}:
+    get:
+      summary: Get intent details
+      description: Fetches detailed information for a specified intent by its ID
+      parameters:
+      - in: path
+        name: intentId
+        required: true
+        schema:
+          type: string
+          description: The unique identifier for the intent
+      responses:
+        '200':
+          description: Successful retrieval of intent details
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - intent
+                properties:
+                  intent:
+                    $ref: '#/components/schemas/Intent'
+        '400':
+          description: Invalid Intent ID
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+      tags:
+      - Intents
+  /intents/{intentId}/execute:
+    post:
+      summary: Execute calldata
+      description: The request object for `executeIntentCalldata`, used for self-execution
+      parameters:
+      - in: path
+        name: intentId
+        required: true
+        schema:
+          type: string
+          description: The unique identifier for the intent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - domain
+              properties:
+                domain:
+                  type: string
+                  description: The domain for the request
+      responses:
+        '200':
+          description: Successful response with a TransactionRequest object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionRequest'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+      tags:
+      - Intents
+  /intents/{intentId}/return-unsupported:
+    post:
+      summary: Return unsupported intent
+      description: The request object for `returnUnsupportedIntent` on hub domain
+      parameters:
+      - in: path
+        name: intentId
+        required: true
+        schema:
+          type: string
+          description: The unique identifier for the intent
+      responses:
+        '200':
+          description: Successful response with a TransactionRequest object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionRequest'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+      tags:
+      - Intents
+components:
+  schemas:
+    TransactionRequest:
+      type: object
+      properties:
+        to:
+          type: string
+          nullable: true
+        from:
+          type: string
+          nullable: true
+        nonce:
+          type: string
+          format: bigint
+        gasLimit:
+          type: string
+          format: bigint
+        gasPrice:
+          type: string
+          format: bigint
+        data:
+          type: string
+          format: byte
+        value:
+          type: string
+          format: bigint
+        chainId:
+          type: integer
+        type:
+          type: integer
+          nullable: true
+        accessList:
+          type: array
+          items:
+            type: object
+            properties:
+              address:
+                type: string
+              storageKeys:
+                type: array
+                items:
+                  type: string
+          nullable: true
+        maxPriorityFeePerGas:
+          type: string
+          format: bigint
+          nullable: true
+        maxFeePerGas:
+          type: string
+          format: bigint
+          nullable: true
+        customData:
+          type: object
+          additionalProperties: true
+          nullable: true
+        ccipReadEnabled:
+          type: boolean
+          nullable: true
+      required:
+      - to
+      - data
+      - chainId
+    IntentRequest:
+      type: object
+      required:
+      - origin
+      - destinations
+      - to
+      - inputAsset
+      - amount
+      - callData
+      properties:
+        origin:
+          type: string
+        destinations:
+          type: array
+          items:
+            type: string
+          nullable: false
+        to:
+          type: string
+        from:
+          type: string
+          description: intent creator address
+        inputAsset:
+          type: string
+        outputAsset:
+          type: string
+        amount:
+          type: string
+          format: bigint
+          description: Input asset amount, denominated in the asset's decimal units on the origin chain
+        callData:
+          type: string
+        ttl:
+          type: integer
+          description: Time-to-live in seconds for fast-path execution (optional)
+        max_fee:
+          type: string
+          description: Max Fees used in intent system (depricated after swaps)
+        permit2Params:
+          type: object
+          properties:
+            nonce:
+              type: string
+              format: bigint
+            deadline:
+              type: string
+              format: bigint
+            signature:
+              type: string
+          required:
+          - nonce
+          - deadline
+          - signature
+        order_id:
+          type: string
+          description: Order ID for newOrder requests
+        isFastPath:
+          type: boolean
+          description: Boolean for sending intent through fast path
+    Intent:
+      type: object
+      properties:
+        intent_id:
+          type: string
+          description: A string representing the intent ID
+        batch_id:
+          type: string
+          nullable: true
+          description: A string representing the batch ID
+        queue_idx:
+          type: integer
+          format: int64
+          description: Queue index
+        message_id:
+          type: string
+          description: A string representing the message ID
+        status:
+          $ref: '#/components/schemas/IntentStatus'
+          description: The status of the intent
+        receiver:
+          type: string
+          description: Receiver address
+        input_asset:
+          type: string
+          description: Input asset
+        output_asset:
+          type: string
+          description: Output asset
+        origin_amount:
+          type: string
+          description: Origin amount
+        destination_amount:
+          type: string
+          nullable: true
+          description: Destination amount
+        origin:
+          type: string
+          description: Origin address
+        destinations:
+          type: array
+          items:
+            type: string
+            description: Destination address
+        nonce:
+          type: integer
+          format: int64
+          description: Nonce
+        transaction_hash:
+          type: string
+          description: Transaction hash (intent_created tx hash)
+        receive_tx_hash:
+          type: string
+          nullable: true
+          description: Receive transaction hash
+        intent_created_timestamp:
+          type: integer
+          format: int64
+          description: Intent Created timestamp
+        settlement_timestamp:
+          type: integer
+          format: int64
+          nullable: true
+          description: Receive timestamp
+        intent_created_block_number:
+          type: integer
+          format: int64
+          description: Intent created block number
+        receive_blocknumber:
+          type: integer
+          format: int64
+          nullable: true
+          description: Receive block number
+        tx_origin:
+          type: string
+          description: Transaction origin address
+        tx_nonce:
+          type: integer
+          format: int64
+          description: Transaction nonce
+        auto_id:
+          type: integer
+          format: int64
+          description: Auto-generated identifier
+        amount_out_min:
+          type: string
+          description: amount_out_min used in intent
+        call_data:
+          type: string
+          nullable: true
+          description: Call data
+        filled:
+          type: boolean
+          nullable: true
+          description: Filler address
+        initiator:
+          type: string
+          nullable: true
+          description: Initiator address
+        native_fee:
+          type: string
+          nullable: true
+          description: Native fee
+        token_fee:
+          type: string
+          nullable: true
+          description: Token fee
+        fee_adapter_initiator:
+          type: string
+          nullable: true
+          description: Fee adapter initiator address
+        origin_gas_fees:
+          type: string
+          description: Origin gas fees
+        destination_gas_fees:
+          type: string
+          nullable: true
+          description: Destination gas fees
+        hub_settlement_domain:
+          type: string
+          description: Settlement domain for an intent
+          nullable: true
+        ttl:
+          type: number
+          description: TTL set for an intent
+          nullable: true
+        is_fast_path:
+          type: boolean
+          description: Is the intent for fast path service
+        fill_solver:
+          type: string
+          nullable: true
+          description: Solver/filler address on destination domain
+        fill_domain:
+          type: string
+          nullable: true
+          description: Destination domain that was actually filled
+        fill_destinations:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: All destination domains from the destination leg
+        fill_transaction_hash:
+          type: string
+          nullable: true
+          description: Destination chain transaction hash for fill
+        fill_timestamp:
+          type: integer
+          format: int64
+          nullable: true
+          description: Timestamp when destination was filled
+        fill_amount:
+          type: string
+          nullable: true
+          description: Amount filled on destination chain (raw units)
+        fill_fee_token:
+          type: string
+          nullable: true
+          description: Fee charged on destination chain in token terms
+        fill_fee_dbps:
+          type: string
+          nullable: true
+          description: Fee charged on destination chain in dbps
+        fill_input_asset:
+          type: string
+          nullable: true
+          description: Input asset used on destination chain
+        fill_output_asset:
+          type: string
+          nullable: true
+          description: Output asset received on destination chain
+        fill_sender:
+          type: string
+          nullable: true
+          description: EOA/contract that submitted destination tx
+        fill_status:
+          type: string
+          nullable: true
+          description: Status of the destination leg
+        fill_initiator:
+          type: string
+          nullable: true
+          description: Initiator for the destination leg
+        fill_receiver:
+          type: string
+          nullable: true
+          description: Receiver for the destination leg
+        max_fee:
+          type: string
+          description: Max Fee for intent in V1 system (defaulted to 0 in new system)
+      required:
+      - intent_id
+      - queue_idx
+      - message_id
+      - status
+      - receiver
+      - input_asset
+      - output_asset
+      - origin_amount
+      - origin
+      - destinations
+      - nonce
+      - data
+      - transaction_hash
+      - intent_created_timestamp
+      - intent_created_block_number
+      - tx_origin
+      - tx_nonce
+      - auto_id
+      - amount_out_min
+      - origin_gas_fees
+      - ttl
+    IntentStatus:
+      type: string
+      enum:
+      - NONE
+      - ADDED
+      - ADDED_SPOKE
+      - ADDED_HUB
+      - DEPOSIT_PROCESSED
+      - FILLED
+      - ADDED_AND_FILLED
+      - INVOICED
+      - SETTLED
+      - SETTLED_AND_COMPLETED
+      - SETTLED_AND_MANUALLY_EXECUTED
+      - UNSUPPORTED
+      - UNSUPPORTED_RETURNED
+      - DISPATCHED_HUB
+      - DISPATCHED_SPOKE
+      - DISPATCHED_UNSUPPORTED

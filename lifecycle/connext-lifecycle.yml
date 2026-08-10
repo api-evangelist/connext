@@ -1,0 +1,94 @@
+generated: '2026-08-09'
+method: searched
+source: >-
+  https://docs.everclear.org/developers/api.md, https://docs.everclear.org/llms.txt,
+  https://docs.everclear.org/resources/subgraphs/mainnet.md,
+  https://crypto.news/clear-collapses-48-as-everclear-shuts-down-protocol/,
+  https://www.theblock.co/post/402252/clear-token-tanks-48-everclear-winds-down-protocol-foundation-labs-unit;
+  host status from direct probes on 2026-08-09
+status: sunset
+summary: >-
+  Everclear (prev Connext) announced on 2026-05-21 that the protocol had been sunset, along
+  with the Everclear Foundation and its labs/research arm. The published statement was "The
+  protocol has been sunsetted. To our knowledge, no funds are stuck — any remaining TVL was
+  withdrawn by users and partners." The developer documentation at docs.everclear.org is
+  still served and still publishes the full OpenAPI, but every runtime host behind it is
+  gone. This artifact records that gap so the archived contract in openapi/ is not mistaken
+  for a callable API.
+versioning:
+  scheme: unversioned
+  mechanism: >-
+    No version segment in the path and no version header documented. The OpenAPI declares
+    info.version 1.0.0 for the "Chimera API" and the servers[] entries carry no version
+    prefix.
+  current: '1.0.0'
+  docs: https://docs.everclear.org/developers/api
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: >-
+    No deprecation policy, no RFC 8594 Sunset/Deprecation header support, and no advance
+    notice mechanism was ever published. The protocol shutdown was announced on social media
+    and the API host was taken offline; the documentation was not updated to say so.
+sla:
+  url: null
+  public_uptime_target: null
+  notes: No SLA or uptime commitment published.
+status_page: null
+status_page_notes: >-
+  No status page was found for Everclear or Connext. status.everclear.org and
+  status.connext.network do not resolve to a status service.
+host_status:
+  checked: '2026-08-09'
+  hosts:
+    - url: https://api.everclear.org
+      role: production API server (OpenAPI servers[])
+      http_status: 530
+      note: Cloudflare edge answers 530 for every path — the origin is unreachable.
+    - url: https://api.testnet.everclear.org
+      role: testnet API server (OpenAPI servers[])
+      http_status: 0
+      note: >-
+        Resolves to an AWS ELB hostname in eu-west-3 that no longer accepts connections; no
+        TCP handshake completes.
+    - url: https://everclear.org
+      role: marketing site
+      http_status: 0
+      note: TLS handshake fails (TLSV1_ALERT_INTERNAL_ERROR) — no valid certificate served.
+    - url: >-
+        https://api.goldsky.com/api/public/project_clssc64y57n5r010yeoly05up/subgraphs/everclear-hub/production-v0.0.1/gn
+      role: Hub subgraph (documented GraphQL query URL)
+      http_status: 404
+      note: 'Goldsky returns {"statusCode":404,"message":"Subgraph not found."}'
+    - url: >-
+        https://api.goldsky.com/api/public/project_clssc64y57n5r010yeoly05up/subgraphs/everclear-spoke-mainnet/production-v0.0.1/gn
+      role: Ethereum Spoke subgraph (documented GraphQL query URL)
+      http_status: 404
+      note: Same 404 for every documented spoke subgraph (base, arbitrum tested identically).
+    - url: https://docs.everclear.org/developers/api.md
+      role: developer documentation + published OpenAPI
+      http_status: 200
+      note: Still served. This is where the archived spec in openapi/ came from.
+    - url: https://www.connext.network/
+      role: legacy Connext marketing site
+      http_status: 200
+      note: Still served; banners "Connext is now Everclear" and links to the dead everclear.org.
+timeline:
+  - date: '2017-06-08'
+    event: Connext GitHub organization created.
+  - date: '2024-06-03'
+    event: Everclear GitHub organization (everclearorg) created.
+  - date: '2024-10'
+    event: Connext rebrands to Everclear; the clearing-layer positioning is introduced.
+  - date: '2025-01'
+    event: NEXT token swapped 1:1 to CLEAR.
+  - date: '2025-04'
+    event: Everclear mainnet launch.
+  - date: '2026-05-21'
+    event: >-
+      Everclear announces the protocol, foundation and labs unit are wound down; the
+      protocol is described as already sunset with no funds stuck.
+deprecated_operations: []
+deprecated_operations_note: >-
+  No operation in openapi/connext-everclear-openapi.yml carries deprecated: true. The whole
+  surface is retired de facto rather than by spec annotation.

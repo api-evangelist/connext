@@ -1,0 +1,113 @@
+generated: '2026-08-09'
+method: derived
+source: >-
+  openapi/connext-everclear-openapi.yml, https://docs.everclear.org/developers/api.md,
+  https://docs.everclear.org/developers/guides/quickstarter.md
+summary: >-
+  Cross-cutting runtime semantics for the Everclear ("Chimera") REST API, derived from the 17
+  OpenAPI documents Everclear publishes. The API is a thin read/build layer over on-chain
+  protocol state: GETs read indexed intents, invoices, assets and history; POSTs do not
+  mutate anything server-side, they return an unsigned TransactionRequest for the caller to
+  sign and broadcast. That shape is why several conventions a normal write API needs
+  (idempotency keys, auth, rate-limit headers) are simply absent.
+authentication:
+  style: none
+  detail: No securityScheme is declared and no operation carries a security requirement.
+  see: authentication/connext-authentication.yml
+idempotency:
+  supported: false
+  detail: >-
+    No Idempotency-Key header, no idempotency parameter, no request-fingerprint field, and no
+    mention of idempotency in the docs. It is not needed in the usual sense: no POST in this
+    API commits state on Everclear's side — POST /intents, POST /solana/intents,
+    POST /tron/intents, POST /intents/{intentId}/execute and
+    POST /intents/{intentId}/return-unsupported are all transaction builders that return
+    calldata. Replay protection lives on-chain in the EVM nonce and in the Permit2 nonce
+    supplied by the caller in IntentRequest.permit2Params.
+  on_chain_replay_protection:
+    - TransactionRequest.nonce (account nonce, chosen by the signer)
+    - IntentRequest.permit2Params.nonce + deadline + signature (Permit2 approval replay guard)
+    - IntentRequest.order_id (caller-supplied order identifier for newOrder requests)
+pagination:
+  primary_style: cursor
+  detail: >-
+    Collection reads take cursor, prevCursor and limit as query parameters and return
+    nextCursor, prevCursor and maxCount alongside the item array. Cursors are opaque strings
+    and are nullable at the ends of the range.
+  request_params: [cursor, prevCursor, limit]
+  response_fields: [nextCursor, prevCursor, maxCount]
+  default_limit: 10
+  operations:
+    - GET /intents
+    - GET /batched-intents
+    - GET /invoices
+    - GET /history/{intentId}/invoice-processing
+  inconsistency:
+    operation: GET /configs/assets
+    style: offset
+    params: [page, limit]
+    note: >-
+      The only paginated endpoint that uses page/limit instead of cursors — and both are
+      REQUIRED there, unlike every cursor endpoint where they are optional. It also returns
+      no nextCursor/maxCount, so a client cannot tell when it has reached the end.
+filtering:
+  detail: >-
+    Intent and invoice collections filter on repeated query arrays and scalars rather than a
+    query language.
+  parameters:
+    - statuses (array of IntentStatus)
+    - origins / destinations / allDestinations (arrays of domain ids)
+    - txHash, userAddress, tickerHash
+    - startDate / endDate (string)
+    - isFastPath (boolean — intents with TTL > 0)
+    - sortOrderByDiscount (invoices only)
+identifiers:
+  intent_id: 32-byte hex intent id, used as the path parameter on every /intents/{intentId} and /invoices/{intentId} route
+  batch_id: batch identifier returned on /batched-intents
+  ticker_hash: hash identifying a token across domains
+  domain: >-
+    Everclear addresses chains by "domain" — a numeric string identifier (mostly the chain id)
+    passed as origin/destinations throughout.
+  canonical_id / canonical_domain: canonical asset identity used by the Asset object
+numbers_and_money:
+  detail: >-
+    All amounts are strings, not numbers, with format bigint, denominated in the asset's own
+    decimal units on the origin chain. Fees come back as fixedFeeUnits (string/float),
+    variableFeeBps and totalFeeBps (number). Asset decimals are exposed as decimal and
+    adopted_decimal on the Asset object.
+versioning:
+  scheme: unversioned
+  detail: No version segment in the path and no version header. See lifecycle/connext-lifecycle.yml.
+error_envelope:
+  media_type: application/json
+  shape: '{error: string, message: string}'
+  rfc9457: false
+  see: errors/connext-problem-types.yml
+rate_limits:
+  documented: false
+  detail: >-
+    No rate-limit policy is published, no 429 response is declared on any operation, and no
+    RateLimit/Retry-After headers are documented.
+request_tracing:
+  supported: false
+  detail: No request-id / correlation-id header is documented or returned in the error envelope.
+webhooks_or_events:
+  supported: false
+  detail: >-
+    No webhook or callback surface. Event consumption was intended to happen through the
+    Goldsky subgraphs (see graphql/connext-everclear-subgraph.graphql) and, for fill agents,
+    an Envio GraphQL indexer — every documented subgraph URL now returns 404.
+field_expansion:
+  supported: false
+sparse_fieldsets:
+  supported: false
+metadata_fields:
+  supported: false
+cross_links:
+  errors: errors/connext-problem-types.yml
+  lifecycle: lifecycle/connext-lifecycle.yml
+  authentication: authentication/connext-authentication.yml
+  data_model: data-model/connext-data-model.yml
+caveat: >-
+  Derived from the published contract only; https://api.everclear.org returned HTTP 530 on
+  2026-08-09, so no live response headers could be observed.

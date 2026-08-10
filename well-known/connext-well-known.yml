@@ -1,0 +1,97 @@
+generated: '2026-08-09'
+method: probed
+source: direct HTTP probes of every host in apis.yml and every OpenAPI servers[] host
+note: >-
+  Nothing was found. api.everclear.org (the declared production server) sits behind
+  Cloudflare and answers HTTP 530 for every path — the origin is gone. The testnet host
+  api.testnet.everclear.org resolves to an AWS ELB hostname that no longer accepts
+  connections. docs.everclear.org and www.connext.network both answer, but return 404 for
+  every /.well-known/ path. No security.txt, no OAuth/OIDC discovery, no api-catalog, no
+  ai-plugin.json, no agent card.
+hosts:
+  - host: https://api.everclear.org
+    reachable: false
+    note: Cloudflare edge returns HTTP 530 (origin unreachable) for every path.
+    documents:
+      - path: /.well-known/security.txt
+        status: 530
+      - path: /.well-known/openid-configuration
+        status: 530
+      - path: /.well-known/oauth-authorization-server
+        status: 530
+      - path: /.well-known/oauth-protected-resource
+        status: 530
+      - path: /.well-known/api-catalog
+        status: 530
+      - path: /.well-known/ai-plugin.json
+        status: 530
+      - path: /.well-known/agent-card.json
+        status: 530
+      - path: /.well-known/agent.json
+        status: 530
+  - host: https://api.testnet.everclear.org
+    reachable: false
+    note: >-
+      DNS resolves to tf-lb-20240823000059086600000009-1217056524.eu-west-3.elb.amazonaws.com
+      but no TCP connection completes (curl exit 000 on every path).
+    documents:
+      - path: /.well-known/security.txt
+        status: 0
+      - path: /.well-known/agent-card.json
+        status: 0
+      - path: /.well-known/agent.json
+        status: 0
+  - host: https://docs.everclear.org
+    reachable: true
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /llms.txt
+        status: 200
+        file: ../llms/connext-llms.txt
+      - path: /robots.txt
+        status: 200
+      - path: /sitemap.xml
+        status: 200
+  - host: https://www.connext.network
+    reachable: true
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://everclear.org
+    reachable: false
+    note: >-
+      TLS handshake fails outright (TLSV1_ALERT_INTERNAL_ERROR) for both everclear.org and
+      www.everclear.org — the Webflow-fronted marketing host no longer presents a valid
+      certificate, so no /.well-known/ path could be probed.
+documents: []
+security_txt:
+  found: false

@@ -1,23 +1,254 @@
 aid: connext
 name: Everclear
-description: 'Everclear is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Everclear (previously Connext) was a crosschain clearing layer for the intent economy. It
+  netted bidirectional rebalancing flows between solvers, fillers and bridges across chains
+  so that liquidity moved once instead of many times, cutting rebalancing cost by up to 10x.
+  Rebalancers deposited into a Spoke contract on any supported chain and named the
+  destination chains they wanted funds on; a Hub contract on the Everclear clearing chain
+  netted those intents against opposing flow, and any intent that could not be netted became
+  a discounted invoice that arbitrageurs could purchase — a dutch-auction style mechanism
+  that kept the system solvent without a central operator. Everclear shipped a public,
+  unauthenticated REST API ("Chimera API") that read indexed intents, invoices, supported
+  assets, route quotes and settlement history, and that built unsigned EVM, Solana and Tron
+  transactions for callers to sign with their own wallet. On 2026-05-21 the team announced
+  the protocol, the Everclear Foundation and the labs unit had all been wound down; the
+  protocol is sunset, the API host no longer answers, and this profile is an archival record
+  of the developer surface Everclear published.
 url: https://raw.githubusercontent.com/api-evangelist/connext/refs/heads/main/apis.yml
+image: https://raw.githubusercontent.com/everclearorg/brand/main/Everclear-Logo-Black.png
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-08-09'
 modified: '2026-08-09'
 tags:
 - Company
-apis: []
+- Blockchain
+- Cryptocurrency
+- Web3
+- Interoperability
+- Cross Chain
+- Bridging
+- Settlement
+- Liquidity
+- Intents
+- DeFi
+- Chain Abstraction
+- Defunct
+apis:
+- aid: connext:connext-batched-intents-api
+  name: Everclear Batched Intents API
+  description: The Batched Intents API from Everclear — 2 operation(s) for batched intents.
+  humanURL: https://docs.everclear.org/developers/api
+  baseURL: https://api.everclear.org
+  tags:
+  - Batched Intents
+  properties:
+  - type: OpenAPI
+    url: openapi/connext-batched-intents-api-openapi.yml
+  - type: Documentation
+    url: https://docs.everclear.org/developers/api
+  - type: ErrorCatalog
+    url: errors/connext-problem-types.yml
+  - type: Authentication
+    url: authentication/connext-authentication.yml
+  - type: Conventions
+    url: conventions/connext-conventions.yml
+  - type: DataModel
+    url: data-model/connext-data-model.yml
+- aid: connext:connext-configs-api
+  name: Everclear Configs API
+  description: The Configs API from Everclear — 1 operation(s) for configs.
+  humanURL: https://docs.everclear.org/developers/api
+  baseURL: https://api.everclear.org
+  tags:
+  - Configs
+  properties:
+  - type: OpenAPI
+    url: openapi/connext-configs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.everclear.org/developers/api
+  - type: ErrorCatalog
+    url: errors/connext-problem-types.yml
+  - type: Authentication
+    url: authentication/connext-authentication.yml
+  - type: Conventions
+    url: conventions/connext-conventions.yml
+  - type: DataModel
+    url: data-model/connext-data-model.yml
+- aid: connext:connext-history-api
+  name: Everclear History API
+  description: The History API from Everclear — 1 operation(s) for history.
+  humanURL: https://docs.everclear.org/developers/api
+  baseURL: https://api.everclear.org
+  tags:
+  - History
+  properties:
+  - type: OpenAPI
+    url: openapi/connext-history-api-openapi.yml
+  - type: Documentation
+    url: https://docs.everclear.org/developers/api
+  - type: ErrorCatalog
+    url: errors/connext-problem-types.yml
+  - type: Authentication
+    url: authentication/connext-authentication.yml
+  - type: Conventions
+    url: conventions/connext-conventions.yml
+  - type: DataModel
+    url: data-model/connext-data-model.yml
+- aid: connext:connext-intents-api
+  name: Everclear Intents API
+  description: The Intents API from Everclear — 4 operation(s) for intents.
+  humanURL: https://docs.everclear.org/developers/api
+  baseURL: https://api.everclear.org
+  tags:
+  - Intents
+  properties:
+  - type: OpenAPI
+    url: openapi/connext-intents-api-openapi.yml
+  - type: Documentation
+    url: https://docs.everclear.org/developers/api
+  - type: ErrorCatalog
+    url: errors/connext-problem-types.yml
+  - type: Authentication
+    url: authentication/connext-authentication.yml
+  - type: Conventions
+    url: conventions/connext-conventions.yml
+  - type: DataModel
+    url: data-model/connext-data-model.yml
+- aid: connext:connext-invoices-api
+  name: Everclear Invoices API
+  description: The Invoices API from Everclear — 3 operation(s) for invoices.
+  humanURL: https://docs.everclear.org/developers/api
+  baseURL: https://api.everclear.org
+  tags:
+  - Invoices
+  properties:
+  - type: OpenAPI
+    url: openapi/connext-invoices-api-openapi.yml
+  - type: Documentation
+    url: https://docs.everclear.org/developers/api
+  - type: ErrorCatalog
+    url: errors/connext-problem-types.yml
+  - type: Authentication
+    url: authentication/connext-authentication.yml
+  - type: Conventions
+    url: conventions/connext-conventions.yml
+  - type: DataModel
+    url: data-model/connext-data-model.yml
+- aid: connext:connext-routes-api
+  name: Everclear Routes API
+  description: The Routes API from Everclear — 2 operation(s) for routes.
+  humanURL: https://docs.everclear.org/developers/api
+  baseURL: https://api.everclear.org
+  tags:
+  - Routes
+  properties:
+  - type: OpenAPI
+    url: openapi/connext-routes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.everclear.org/developers/api
+  - type: ErrorCatalog
+    url: errors/connext-problem-types.yml
+  - type: Authentication
+    url: authentication/connext-authentication.yml
+  - type: Conventions
+    url: conventions/connext-conventions.yml
+  - type: DataModel
+    url: data-model/connext-data-model.yml
+- aid: connext:connext-solana-api
+  name: Everclear Solana API
+  description: The Solana API from Everclear — 2 operation(s) for solana.
+  humanURL: https://docs.everclear.org/developers/api
+  baseURL: https://api.everclear.org
+  tags:
+  - Solana
+  properties:
+  - type: OpenAPI
+    url: openapi/connext-solana-api-openapi.yml
+  - type: Documentation
+    url: https://docs.everclear.org/developers/api
+  - type: ErrorCatalog
+    url: errors/connext-problem-types.yml
+  - type: Authentication
+    url: authentication/connext-authentication.yml
+  - type: Conventions
+    url: conventions/connext-conventions.yml
+  - type: DataModel
+    url: data-model/connext-data-model.yml
+- aid: connext:connext-tron-api
+  name: Everclear Tron API
+  description: The Tron API from Everclear — 1 operation(s) for tron.
+  humanURL: https://docs.everclear.org/developers/api
+  baseURL: https://api.everclear.org
+  tags:
+  - Tron
+  properties:
+  - type: OpenAPI
+    url: openapi/connext-tron-api-openapi.yml
+  - type: Documentation
+    url: https://docs.everclear.org/developers/api
+  - type: ErrorCatalog
+    url: errors/connext-problem-types.yml
+  - type: Authentication
+    url: authentication/connext-authentication.yml
+  - type: Conventions
+    url: conventions/connext-conventions.yml
+  - type: DataModel
+    url: data-model/connext-data-model.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/connext-domain-security.yml
 - type: Website
-  url: https://forgeglobal.com/connext_stock/
+  url: https://www.connext.network/
+- type: DeveloperPortal
+  url: https://docs.everclear.org/
+- type: Documentation
+  url: https://docs.everclear.org/
+- type: APIReference
+  url: https://docs.everclear.org/developers/api
+- type: GettingStarted
+  url: https://docs.everclear.org/developers/getting-started
+- type: Support
+  url: https://www.connext.network/support
+- type: GitHubOrganization
+  url: https://github.com/everclearorg
+- type: Blog
+  url: https://blog.connext.network/
+- type: OpenAPI
+  url: openapi/connext-everclear-openapi.yml
+- type: Overlay
+  url: overlays/connext-everclear-overlay.yaml
+- type: GraphQL
+  url: graphql/connext-everclear-subgraph.graphql
+- type: LLMsTxt
+  url: llms/connext-llms.txt
+- type: Packages
+  url: packages/connext-packages.yml
+- type: SDKs
+  url: packages/connext-packages.yml
+- type: WellKnown
+  url: well-known/connext-well-known.yml
+- type: Authentication
+  url: authentication/connext-authentication.yml
+- type: ErrorCatalog
+  url: errors/connext-problem-types.yml
+- type: Conventions
+  url: conventions/connext-conventions.yml
+- type: DataModel
+  url: data-model/connext-data-model.yml
+- type: Lifecycle
+  url: lifecycle/connext-lifecycle.yml
+- type: Conformance
+  url: conformance/connext-conformance.yml
+x-enrichment:
+  date: '2026-08-09'
+  status: enriched
+  artifacts_added: 13
+  pass: local-v1

@@ -1,0 +1,27 @@
+# Everclear Docs
+
+## Everclear Docs
+
+- [Overview](https://docs.everclear.org/concepts/overview.md)
+- [Background](https://docs.everclear.org/concepts/background.md)
+- [How it Works](https://docs.everclear.org/concepts/how-it-works.md): Let's dive deeper.
+- [Architecture](https://docs.everclear.org/concepts/how-it-works/architecture.md)
+- [Intents](https://docs.everclear.org/concepts/how-it-works/intents.md): Everclear supports the direct integration of solver networks and makes no assumptions about signaling, discovery, matching, or execution of the intent.
+- [Getting Started](https://docs.everclear.org/developers/getting-started.md)
+- [Fundamentals](https://docs.everclear.org/developers/fundamentals.md)
+- [Protocol Mechanics](https://docs.everclear.org/developers/protocol-mechanics.md)
+- [Guides](https://docs.everclear.org/developers/guides.md): Here you'll find some helpful guides for getting started building with the Everclear protocol.
+- [Quickstarter](https://docs.everclear.org/developers/guides/quickstarter.md)
+- [Priority Settlement](https://docs.everclear.org/developers/guides/priority-settlement.md)
+- [Cross Chain Swaps](https://docs.everclear.org/developers/guides/cross-chain-swaps.md)
+- [xERC20](https://docs.everclear.org/developers/guides/xerc20.md)
+- [API](https://docs.everclear.org/developers/api.md): The Everclear API contains endpoints to create new intents, track intent statuses, and more.
+- [Audits](https://docs.everclear.org/developers/audits.md)
+- [Glossary](https://docs.everclear.org/developers/glossary.md)
+- [FAQs](https://docs.everclear.org/developers/faqs.md)
+- [Contracts](https://docs.everclear.org/resources/contracts.md): Here you can find deployed contracts by environment.
+- [Testnet](https://docs.everclear.org/resources/contracts/testnet.md): The contract addresses for the deployed Everclear contracts in our testnet environment.
+- [Mainnet](https://docs.everclear.org/resources/contracts/mainnet.md): The contract addresses for the deployed Everclear contracts in our mainnet environment.
+- [Subgraphs](https://docs.everclear.org/resources/subgraphs.md)
+- [Testnet](https://docs.everclear.org/resources/subgraphs/testnet.md): The subgraph deployments in our testnet environment.
+- [Mainnet](https://docs.everclear.org/resources/subgraphs/mainnet.md): The subgraph deployments in our mainnet environment.

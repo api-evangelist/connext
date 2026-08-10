@@ -1,0 +1,1818 @@
+# generated: '2026-08-09'
+# method: searched
+# source: https://docs.everclear.org/developers/api.md
+# note: >-
+#   Everclear ("Chimera API") publishes its OpenAPI as 17 separate, per-endpoint OpenAPI 3.0.1
+#   documents embedded in the docs page at https://docs.everclear.org/developers/api.md (also
+#   rendered at https://docs.everclear.org/developers/api). Those 17 documents were extracted
+#   verbatim and merged into this single document: identical info/servers blocks, union of
+#   paths, union of components.schemas. Zero conflicts were found during the merge — no
+#   operation or schema was altered, added, or invented by API Evangelist.
+#   HOST STATUS 2026-08-09: the declared production server https://api.everclear.org returns
+#   HTTP 530 and https://api.testnet.everclear.org does not complete a TCP connection. The
+#   Everclear protocol was sunset in May 2026; this spec is retained as an archival record of
+#   the published contract, not as a callable API. See lifecycle/connext-lifecycle.yml.
+openapi: 3.0.1
+info:
+  title: Chimera API
+  version: 1.0.0
+servers:
+- url: https://api.testnet.everclear.org
+- url: https://api.everclear.org
+paths:
+  /intents:
+    post:
+      summary: Create new intent(s)
+      description: Endpoint to generate a TransactionRequest for one or multiple intents. For multiple
+        intents, the transaction will target a fee adapter contract with appropriately formatted calldata.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - $ref: '#/components/schemas/IntentRequest'
+              - type: array
+                items:
+                  $ref: '#/components/schemas/IntentRequest'
+      responses:
+        '200':
+          description: Successful response with a TransactionRequest object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionRequest'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '404':
+          description: Registries not found and deployed for given domain
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+    get:
+      summary: Get intents
+      description: Retrieves a paginated list of intents based on query parameters
+      parameters:
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: prevCursor
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        default: 10
+      - in: query
+        name: statuses
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: origins
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: destinations
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: allDestinations
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: txHash
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: userAddress
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: startDate
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: endDate
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: tickerHash
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: isFastPath
+        required: false
+        schema:
+          type: boolean
+        description: Filter for fast path intents (intents with TTL > 0)
+      responses:
+        '200':
+          description: Successful retrieval of intents
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - intents
+                - nextCursor
+                - maxCount
+                - prevCursor
+                properties:
+                  intents:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Intent'
+                  nextCursor:
+                    type: string
+                    required: true
+                    nullable: true
+                  prevCursor:
+                    type: string
+                    required: true
+                    nullable: true
+                  maxCount:
+                    type: number
+                    required: true
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+  /batched-intents:
+    get:
+      summary: Get intents
+      description: Retrieves a paginated list of intents based on query parameters
+      parameters:
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: prevCursor
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        default: 10
+      - in: query
+        name: statuses
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: origins
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: destinations
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: allDestinations
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: txHash
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: userAddress
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: startDate
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: endDate
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: tickerHash
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: isFastPath
+        required: false
+        schema:
+          type: boolean
+        description: Filter for fast path intents (intents with TTL > 0)
+      responses:
+        '200':
+          description: Successful retrieval of intents
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - items
+                - nextCursor
+                properties:
+                  items:
+                    type: array
+                    items:
+                      anyOf:
+                      - type: object
+                        required:
+                        - type
+                        - batchId
+                        - intents
+                        - token_fee
+                        - native_fee
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - batch
+                          batchId:
+                            type: string
+                          token_fee:
+                            type: string
+                          native_fee:
+                            type: string
+                          intents:
+                            type: array
+                            items:
+                              $ref: '#/components/schemas/Intent'
+                      - type: object
+                        required:
+                        - type
+                        - intent
+                        properties:
+                          type:
+                            type: string
+                            enum:
+                            - intent
+                          intent:
+                            $ref: '#/components/schemas/Intent'
+                  nextCursor:
+                    type: string
+                    required: true
+                    nullable: true
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+  /batched-intents/{batchId}:
+    get:
+      summary: Get batched intents
+      description: Retrieves a list of intents for a given batch ID
+      parameters:
+      - in: path
+        name: batchId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful retrieval of intents
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - batchId
+                - intents
+                - token_fee
+                - native_fee
+                properties:
+                  batchId:
+                    type: string
+                  token_fee:
+                    type: string
+                  native_fee:
+                    type: string
+                  intents:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Intent'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+  /solana/intents:
+    post:
+      summary: Create a new intent on Solana
+      description: Submits a new intent transaction to the Solana blockchain using the specified parameters
+        and configuration.
+      operationId: callNewIntentSolana
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - origin
+              - destinations
+              - to
+              - inputAsset
+              - amount
+              - callData
+              - maxFee
+              - user
+              properties:
+                origin:
+                  type: string
+                destinations:
+                  type: array
+                  items:
+                    type: string
+                  nullable: false
+                to:
+                  type: string
+                from:
+                  type: string
+                  description: intent creator address
+                inputAsset:
+                  type: string
+                amount:
+                  type: string
+                  format: bigint
+                  description: Token amount, denominated in the asset's decimal units on the origin chain
+                callData:
+                  type: string
+                maxFee:
+                  type: string
+                  format: bigint
+                  description: Maximum fee amount, denominated in the asset's decimal units on the origin
+                    chain
+                user:
+                  type: string
+                userTokenAccountPublicKey:
+                  type: string
+                programVaultAccountPublicKey:
+                  type: string
+                permit2Params:
+                  type: object
+                  properties:
+                    nonce:
+                      type: string
+                      format: bigint
+                      description: Nonce as a bigint
+                    deadline:
+                      type: string
+                      format: bigint
+                      description: Deadline as a bigint
+                    signature:
+                      type: string
+                  required:
+                  - nonce
+                  - deadline
+                  - signature
+                order_id:
+                  type: string
+                  description: Order ID for newOrder requests
+      responses:
+        '200':
+          description: Successfully created intent transaction
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionRequest'
+        '400':
+          description: Registries not found and deployed for given domain
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '404':
+          description: Registries not found and deployed for given domain
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Registries not found and deployed for given domain
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+  /solana/create-lookup-table:
+    post:
+      summary: To create lookup tables for new account + asset
+      description: Creating lookup tables for new users to save account space on chain
+      operationId: createSolanaLookupTable
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - inputAsset
+              - user
+              - userTokenAccountPublicKey
+              - programVaultAccountPublicKey
+              properties:
+                inputAsset:
+                  type: string
+                user:
+                  type: string
+                userTokenAccountPublicKey:
+                  type: string
+                programVaultAccountPublicKey:
+                  type: string
+      responses:
+        '200':
+          description: Succesfull serialise data fetch transaction data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionRequest'
+        '400':
+          description: Registries not found and deployed for given domain
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '404':
+          description: Registries not found and deployed for given domain
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Registries not found and deployed for given domain
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+  /tron/intents:
+    post:
+      summary: Create a new intent on Tron
+      description: Submits a new intent transaction to the Tron blockchain using the specified parameters
+        and configuration.
+      operationId: callNewIntentTron
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - origin
+              - destinations
+              - to
+              - inputAsset
+              - amount
+              - callData
+              properties:
+                origin:
+                  type: string
+                destinations:
+                  type: array
+                  items:
+                    type: string
+                  nullable: false
+                to:
+                  type: string
+                from:
+                  type: string
+                  description: intent creator address
+                inputAsset:
+                  type: string
+                outputAsset:
+                  type: string
+                amount:
+                  type: string
+                  format: bigint
+                  description: Input asset amount, denominated in the asset's decimal units on the origin
+                    chain
+                callData:
+                  type: string
+                ttl:
+                  type: integer
+                  description: Time-to-live in seconds for fast-path execution (optional)
+                max_fee:
+                  type: string
+                  description: Max Fees used in intent system (depricated after swaps)
+                permit2Params:
+                  type: object
+                  properties:
+                    nonce:
+                      type: string
+                      format: bigint
+                    deadline:
+                      type: string
+                      format: bigint
+                    signature:
+                      type: string
+                  required:
+                  - nonce
+                  - deadline
+                  - signature
+                order_id:
+                  type: string
+                  description: Order ID for newOrder requests
+                isFastPath:
+                  type: boolean
+                  description: Boolean for sending intent through fast path
+      responses:
+        '200':
+          description: Successfully created intent transaction
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionRequest'
+        '400':
+          description: Registries not found and deployed for given domain
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '404':
+          description: Registries not found and deployed for given domain
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Registries not found and deployed for given domain
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+  /intents/{intentId}:
+    get:
+      summary: Get intent details
+      description: Fetches detailed information for a specified intent by its ID
+      parameters:
+      - in: path
+        name: intentId
+        required: true
+        schema:
+          type: string
+          description: The unique identifier for the intent
+      responses:
+        '200':
+          description: Successful retrieval of intent details
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - intent
+                properties:
+                  intent:
+                    $ref: '#/components/schemas/Intent'
+        '400':
+          description: Invalid Intent ID
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+  /intents/{intentId}/execute:
+    post:
+      summary: Execute calldata
+      description: The request object for `executeIntentCalldata`, used for self-execution
+      parameters:
+      - in: path
+        name: intentId
+        required: true
+        schema:
+          type: string
+          description: The unique identifier for the intent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - domain
+              properties:
+                domain:
+                  type: string
+                  description: The domain for the request
+      responses:
+        '200':
+          description: Successful response with a TransactionRequest object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionRequest'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+  /intents/{intentId}/return-unsupported:
+    post:
+      summary: Return unsupported intent
+      description: The request object for `returnUnsupportedIntent` on hub domain
+      parameters:
+      - in: path
+        name: intentId
+        required: true
+        schema:
+          type: string
+          description: The unique identifier for the intent
+      responses:
+        '200':
+          description: Successful response with a TransactionRequest object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionRequest'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+  /invoices:
+    get:
+      summary: Get invoices
+      description: Retrieves a paginated list of invoices in FIFO queue order
+      parameters:
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: prevCursor
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        default: 10
+      - in: query
+        name: tickerHash
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: origins
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: destinations
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: sortOrderByDiscount
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful retrieval of invoices
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - invoices
+                - nextCursor
+                - maxCount
+                - prevCursor
+                properties:
+                  invoices:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Invoice'
+                  nextCursor:
+                    type: string
+                    required: true
+                    nullable: true
+                  prevCursor:
+                    type: string
+                    required: true
+                    nullable: true
+                  maxCount:
+                    type: number
+                    required: true
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+  /invoices/{intentId}:
+    get:
+      summary: Return invoice details
+      description: Fetches detailed information for a specified invoice by its intentID
+      parameters:
+      - in: path
+        name: intentId
+        required: true
+        schema:
+          type: string
+          description: The unique identifier for the intent
+      responses:
+        '200':
+          description: Successful retrieval of invoice details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  invoice:
+                    $ref: '#/components/schemas/Invoice'
+        '400':
+          description: Invalid Intent ID
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+  /invoices/{intentId}/min-amounts:
+    get:
+      summary: Calculate minimum amounts needed to settle invoice
+      description: Calculates the minimum amounts per destination domain to settle a specified invoice.
+        This returns a map of destination domain to minimum amount required in standardized 1e18 decimals.
+      parameters:
+      - in: path
+        name: intentId
+        required: true
+        schema:
+          type: string
+          description: The unique identifier for the invoice intent
+      responses:
+        '200':
+          description: Successful calculation of minimum amounts
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - invoiceAmount
+                - amountAfterDiscounts
+                - discountBps
+                - custodiedAmounts
+                - minAmounts
+                properties:
+                  invoiceAmount:
+                    type: string
+                    description: Original invoice amount before discount
+                  amountAfterDiscounts:
+                    type: object
+                    additionalProperties:
+                      type: string
+                    description: Map of domain to amount after applying the discount
+                  discountBps:
+                    type: string
+                    description: Current discount in basis points
+                  custodiedAmounts:
+                    type: object
+                    additionalProperties:
+                      type: string
+                    description: Map of domain to custodied amount
+                  minAmounts:
+                    type: object
+                    additionalProperties:
+                      type: string
+                    description: Map of domain to minimum required amount
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+  /configs/assets:
+    get:
+      summary: Get supported assets
+      description: Lists assets supported by the protocol, with pagination and optional filtering by type
+      parameters:
+      - in: query
+        name: page
+        required: true
+        schema:
+          type: integer
+      - in: query
+        name: limit
+        required: true
+        schema:
+          type: integer
+      - in: query
+        name: type
+        required: false
+        schema:
+          type: string
+          enum:
+          - xERC20
+          - other
+      responses:
+        '200':
+          description: Successful retrieval of assets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  assets:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Asset'
+        '400':
+          description: Invalid Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                  message:
+                    type: string
+  /routes/quotes:
+    post:
+      summary: Get quote for a route, including fees and limits
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - origin
+              - destinations
+              - inputAsset
+              - amount
+              properties:
+                origin:
+                  type: string
+                destinations:
+                  type: array
+                  items:
+                    type: string
+                  nullable: false
+                inputAsset:
+                  type: string
+                outputAsset:
+                  type: string
+                amount:
+                  type: string
+                  description: Token amount, denominated in the asset's decimal units on the origin chain
+                to:
+                  type: string
+                from:
+                  type: string
+                  description: intent creator address
+                order_id:
+                  type: string
+                  description: Order ID for newOrder requests
+      responses:
+        '200':
+          description: Successfully retrieved quote.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - fixedFeeUnits
+                - variableFeeBps
+                - totalFeeBps
+                - currentLimit
+                - reqType
+                - splitCount
+                - expectedAmount
+                properties:
+                  fixedFeeUnits:
+                    type: string
+                    format: float
+                    description: Fixed fee in token units.
+                  variableFeeBps:
+                    type: number
+                    format: float
+                    description: Variable fee in basis points.
+                  totalFeeBps:
+                    type: number
+                    format: float
+                    description: Total fee in basis points given the amount.
+                  expectedAmount:
+                    type: string
+                    format: float
+                    description: Expected amount after fees are deducted.
+                  currentLimit:
+                    type: string
+                    format: float
+                    description: Current limit in token amount.
+                  splitCount:
+                    type: integer
+                    description: Number of splits for the intent
+                  reqType:
+                    type: string
+                    description: Type of quote operation. 'bridge' | 'swap' | 'x-swap' | 'invalid'
+                  fastPathQuote:
+                    description: Fast path quote details if fast path is available, or error message if
+                      over limit
+                    anyOf:
+                    - type: object
+                      description: Fast path quote details
+                      required:
+                      - fixedFeeUnits
+                      - variableFeeBps
+                      - totalFeeBps
+                      - expectedAmount
+                      properties:
+                        fixedFeeUnits:
+                          type: string
+                          format: float
+                          description: Fixed fee in token units for fast path.
+                        variableFeeBps:
+                          type: number
+                          format: float
+                          description: Variable fee in basis points for fast path.
+                        totalFeeBps:
+                          type: number
+                          format: float
+                          description: Total fee in basis points for fast path.
+                        expectedAmount:
+                          type: string
+                          format: float
+                          description: Expected amount after fast path fees are deducted.
+                        expectedFillTime:
+                          type: string
+                          format: number
+                          description: Expected time to get fast path intent filled by solver
+                    - type: object
+                      description: Error message when fast path is over limit
+                      required:
+                      - message
+                      properties:
+                        message:
+                          type: string
+                          description: Error message indicating the amount is over the fast path limit.
+                  settlementEstimate:
+                    anyOf:
+                    - type: object
+                      required:
+                      - p25Minutes
+                      - p50Minutes
+                      - p75Minutes
+                      properties:
+                        p25Minutes:
+                          type: number
+                          format: float
+                          description: Estimated settlement time in minutes.
+                        p50Minutes:
+                          type: number
+                          format: float
+                          description: Estimated settlement time in minutes.
+                        p75Minutes:
+                          type: number
+                          format: float
+                          description: Estimated settlement time in minutes.
+                    - type: object
+                      required:
+                      - message
+                      properties:
+                        message:
+                          type: string
+                          description: Error message if no estimate is available.
+        '400':
+          description: Invalid request parameters.
+        '500':
+          description: Internal server error.
+  /routes/limits:
+    post:
+      summary: Get current limits for a route
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - origin
+              - destinations
+              - inputAsset
+              properties:
+                origin:
+                  type: string
+                destinations:
+                  type: array
+                  items:
+                    type: string
+                  nullable: false
+                inputAsset:
+                  type: string
+      responses:
+        '200':
+          description: Successfully retrieved limits.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - currentLimit
+                properties:
+                  currentLimit:
+                    type: string
+                    format: float
+                    description: Current limit in token's native decimal units.
+        '400':
+          description: Invalid request parameters.
+        '500':
+          description: Internal server error.
+  /history/{intentId}/invoice-processing:
+    get:
+      summary: Get history of invoice processing
+      description: Retrieves detailed history of a specific invoice, including epochs and details of processing
+        as deposit and invoice.
+      parameters:
+      - in: path
+        name: intentId
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the intent.
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+      responses:
+        '200':
+          description: Successful response with history of invoice processing
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - invoiceProcessingHistory
+                - nextCursor
+                properties:
+                  invoiceProcessingHistory:
+                    type: array
+                    description: Array containing history records of invoice processing.
+                    items:
+                      type: object
+                      required:
+                      - epoch
+                      - domain
+                      - custodiedAssets
+                      - amountToBeDiscounted
+                      - rewardsForDepositors
+                      - amountAfterDiscount
+                      - discountdbps
+                      - selectedDestinationDomain
+                      - selectedDestinationDomainLiquidity
+                      - timestamp
+                      properties:
+                        epoch:
+                          type: integer
+                          description: Epoch in which the processing took place.
+                        domain:
+                          type: integer
+                          description: Domain identifier for the processing step.
+                        custodiedAssets:
+                          type: number
+                          format: float
+                          description: Total assets custodied during the epoch.
+                        amountToBeDiscounted:
+                          type: number
+                          format: float
+                          description: Amount of assets subject to discount.
+                        rewardsForDepositors:
+                          type: number
+                          format: float
+                          description: Rewards allocated for depositors.
+                        amountAfterDiscount:
+                          type: number
+                          format: float
+                          description: Total amount after applying discounts.
+                        discountdbps:
+                          type: integer
+                          description: Discount basis points applied.
+                        selectedDestinationDomain:
+                          type: integer
+                          description: Selected destination domain for the intent.
+                        selectedDestinationDomainLiquidity:
+                          type: number
+                          format: float
+                          description: Liquidity available in the selected destination domain.
+                        timestamp:
+                          type: string
+                  nextCursor:
+                    type: string
+                    nullable: true
+        '400':
+          description: Invalid chain or asset parameter.
+        '500':
+          description: Internal server error.
+components:
+  schemas:
+    IntentRequest:
+      type: object
+      required:
+      - origin
+      - destinations
+      - to
+      - inputAsset
+      - amount
+      - callData
+      properties:
+        origin:
+          type: string
+        destinations:
+          type: array
+          items:
+            type: string
+          nullable: false
+        to:
+          type: string
+        from:
+          type: string
+          description: intent creator address
+        inputAsset:
+          type: string
+        outputAsset:
+          type: string
+        amount:
+          type: string
+          format: bigint
+          description: Input asset amount, denominated in the asset's decimal units on the origin chain
+        callData:
+          type: string
+        ttl:
+          type: integer
+          description: Time-to-live in seconds for fast-path execution (optional)
+        max_fee:
+          type: string
+          description: Max Fees used in intent system (depricated after swaps)
+        permit2Params:
+          type: object
+          properties:
+            nonce:
+              type: string
+              format: bigint
+            deadline:
+              type: string
+              format: bigint
+            signature:
+              type: string
+          required:
+          - nonce
+          - deadline
+          - signature
+        order_id:
+          type: string
+          description: Order ID for newOrder requests
+        isFastPath:
+          type: boolean
+          description: Boolean for sending intent through fast path
+    TransactionRequest:
+      type: object
+      properties:
+        to:
+          type: string
+          nullable: true
+        from:
+          type: string
+          nullable: true
+        nonce:
+          type: string
+          format: bigint
+        gasLimit:
+          type: string
+          format: bigint
+        gasPrice:
+          type: string
+          format: bigint
+        data:
+          type: string
+          format: byte
+        value:
+          type: string
+          format: bigint
+        chainId:
+          type: integer
+        type:
+          type: integer
+          nullable: true
+        accessList:
+          type: array
+          items:
+            type: object
+            properties:
+              address:
+                type: string
+              storageKeys:
+                type: array
+                items:
+                  type: string
+          nullable: true
+        maxPriorityFeePerGas:
+          type: string
+          format: bigint
+          nullable: true
+        maxFeePerGas:
+          type: string
+          format: bigint
+          nullable: true
+        customData:
+          type: object
+          additionalProperties: true
+          nullable: true
+        ccipReadEnabled:
+          type: boolean
+          nullable: true
+      required:
+      - to
+      - data
+      - chainId
+    Intent:
+      type: object
+      properties:
+        intent_id:
+          type: string
+          description: A string representing the intent ID
+        batch_id:
+          type: string
+          nullable: true
+          description: A string representing the batch ID
+        queue_idx:
+          type: integer
+          format: int64
+          description: Queue index
+        message_id:
+          type: string
+          description: A string representing the message ID
+        status:
+          $ref: '#/components/schemas/IntentStatus'
+          description: The status of the intent
+        receiver:
+          type: string
+          description: Receiver address
+        input_asset:
+          type: string
+          description: Input asset
+        output_asset:
+          type: string
+          description: Output asset
+        origin_amount:
+          type: string
+          description: Origin amount
+        destination_amount:
+          type: string
+          nullable: true
+          description: Destination amount
+        origin:
+          type: string
+          description: Origin address
+        destinations:
+          type: array
+          items:
+            type: string
+            description: Destination address
+        nonce:
+          type: integer
+          format: int64
+          description: Nonce
+        transaction_hash:
+          type: string
+          description: Transaction hash (intent_created tx hash)
+        receive_tx_hash:
+          type: string
+          nullable: true
+          description: Receive transaction hash
+        intent_created_timestamp:
+          type: integer
+          format: int64
+          description: Intent Created timestamp
+        settlement_timestamp:
+          type: integer
+          format: int64
+          nullable: true
+          description: Receive timestamp
+        intent_created_block_number:
+          type: integer
+          format: int64
+          description: Intent created block number
+        receive_blocknumber:
+          type: integer
+          format: int64
+          nullable: true
+          description: Receive block number
+        tx_origin:
+          type: string
+          description: Transaction origin address
+        tx_nonce:
+          type: integer
+          format: int64
+          description: Transaction nonce
+        auto_id:
+          type: integer
+          format: int64
+          description: Auto-generated identifier
+        amount_out_min:
+          type: string
+          description: amount_out_min used in intent
+        call_data:
+          type: string
+          nullable: true
+          description: Call data
+        filled:
+          type: boolean
+          nullable: true
+          description: Filler address
+        initiator:
+          type: string
+          nullable: true
+          description: Initiator address
+        native_fee:
+          type: string
+          nullable: true
+          description: Native fee
+        token_fee:
+          type: string
+          nullable: true
+          description: Token fee
+        fee_adapter_initiator:
+          type: string
+          nullable: true
+          description: Fee adapter initiator address
+        origin_gas_fees:
+          type: string
+          description: Origin gas fees
+        destination_gas_fees:
+          type: string
+          nullable: true
+          description: Destination gas fees
+        hub_settlement_domain:
+          type: string
+          description: Settlement domain for an intent
+          nullable: true
+        ttl:
+          type: number
+          description: TTL set for an intent
+          nullable: true
+        is_fast_path:
+          type: boolean
+          description: Is the intent for fast path service
+        fill_solver:
+          type: string
+          nullable: true
+          description: Solver/filler address on destination domain
+        fill_domain:
+          type: string
+          nullable: true
+          description: Destination domain that was actually filled
+        fill_destinations:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: All destination domains from the destination leg
+        fill_transaction_hash:
+          type: string
+          nullable: true
+          description: Destination chain transaction hash for fill
+        fill_timestamp:
+          type: integer
+          format: int64
+          nullable: true
+          description: Timestamp when destination was filled
+        fill_amount:
+          type: string
+          nullable: true
+          description: Amount filled on destination chain (raw units)
+        fill_fee_token:
+          type: string
+          nullable: true
+          description: Fee charged on destination chain in token terms
+        fill_fee_dbps:
+          type: string
+          nullable: true
+          description: Fee charged on destination chain in dbps
+        fill_input_asset:
+          type: string
+          nullable: true
+          description: Input asset used on destination chain
+        fill_output_asset:
+          type: string
+          nullable: true
+          description: Output asset received on destination chain
+        fill_sender:
+          type: string
+          nullable: true
+          description: EOA/contract that submitted destination tx
+        fill_status:
+          type: string
+          nullable: true
+          description: Status of the destination leg
+        fill_initiator:
+          type: string
+          nullable: true
+          description: Initiator for the destination leg
+        fill_receiver:
+          type: string
+          nullable: true
+          description: Receiver for the destination leg
+        max_fee:
+          type: string
+          description: Max Fee for intent in V1 system (defaulted to 0 in new system)
+      required:
+      - intent_id
+      - queue_idx
+      - message_id
+      - status
+      - receiver
+      - input_asset
+      - output_asset
+      - origin_amount
+      - origin
+      - destinations
+      - nonce
+      - data
+      - transaction_hash
+      - intent_created_timestamp
+      - intent_created_block_number
+      - tx_origin
+      - tx_nonce
+      - auto_id
+      - amount_out_min
+      - origin_gas_fees
+      - ttl
+    IntentStatus:
+      type: string
+      enum:
+      - NONE
+      - ADDED
+      - ADDED_SPOKE
+      - ADDED_HUB
+      - DEPOSIT_PROCESSED
+      - FILLED
+      - ADDED_AND_FILLED
+      - INVOICED
+      - SETTLED
+      - SETTLED_AND_COMPLETED
+      - SETTLED_AND_MANUALLY_EXECUTED
+      - UNSUPPORTED
+      - UNSUPPORTED_RETURNED
+      - DISPATCHED_HUB
+      - DISPATCHED_SPOKE
+      - DISPATCHED_UNSUPPORTED
+    Invoice:
+      type: object
+      required:
+      - intent_id
+      - owner
+      - entry_epoch
+      - amount
+      - discount
+      - origin
+      - destinations
+      - ticker_hash
+      - hub_invoice_enqueued_timestamp
+      - discountBps
+      properties:
+        intent_id:
+          type: string
+          description: A string representing the intent ID
+        owner:
+          type: string
+          description: Invoice owner address
+        entry_epoch:
+          type: integer
+          format: int64
+          description: The epoch when the invoice was created
+        amount:
+          type: string
+          description: Amount of the invoice
+        discountBps:
+          type: integer
+          format: int64
+          description: The current discount of the invoice in BPS
+        origin:
+          type: string
+        destinations:
+          type: array
+          items:
+            type: string
+        hub_status:
+          $ref: '#/components/schemas/IntentStatus'
+          description: The status of the intent on Hub domain
+          nullable: true
+        ticker_hash:
+          type: string
+        hub_invoice_enqueued_timestamp:
+          type: string
+    Asset:
+      type: object
+      required:
+      - local
+      - adopted
+      - canonical_id
+      - canonical_domain
+      - domain
+      - key
+      - id
+      - decimal
+      - adopted_decimal
+      properties:
+        local:
+          type: string
+          maxLength: 66
+        adopted:
+          type: string
+        canonical_id:
+          type: string
+          maxLength: 66
+        canonical_domain:
+          type: string
+          maxLength: 66
+        domain:
+          type: string
+        key:
+          type: string
+        id:
+          type: string
+        decimal:
+          type: number
+        adopted_decimal:
+          type: number

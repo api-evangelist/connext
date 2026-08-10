@@ -1,0 +1,111 @@
+generated: '2026-08-09'
+method: searched
+source: >-
+  https://registry.npmjs.org/-/v1/search?text=connext,
+  https://registry.npmjs.org/-/v1/search?text=everclear,
+  https://github.com/connext, https://github.com/everclearorg
+note: >-
+  Everclear (prev Connext) never shipped a first-party client library for the Everclear
+  ("Chimera") REST API — integrators call it over plain HTTP. The packages below are the
+  first-party libraries published for the two protocol generations: the @connext/* scope
+  (Connext Amarok / NXTP SDK, npm org "connext") and the @everclear-org/* scope (the
+  Everclear contracts/chainservice packages, published from the chimera-monorepo built by
+  Defi Wonderland). All are legacy: the Everclear protocol was sunset in May 2026 and the
+  @everclear-org/* packages never left 0.0.1-alpha.
+packages:
+  - language: javascript
+    registry: npm
+    name: '@connext/sdk'
+    url: https://www.npmjs.com/package/@connext/sdk
+    install: npm install @connext/sdk
+    version: 2.4.1
+    official: true
+    scope: connext-amarok
+    description: Client-side package for interacting with the Connext protocol.
+  - language: javascript
+    registry: npm
+    name: '@connext/sdk-core'
+    url: https://www.npmjs.com/package/@connext/sdk-core
+    install: npm install @connext/sdk-core
+    version: 2.4.1
+    official: true
+    scope: connext-amarok
+    description: Core client-side package for interacting with the Connext protocol.
+  - language: javascript
+    registry: npm
+    name: '@connext/nxtp-utils'
+    url: https://www.npmjs.com/package/@connext/nxtp-utils
+    install: npm install @connext/nxtp-utils
+    version: 2.4.1
+    official: true
+    scope: connext-amarok
+    description: Common utilities for use within the @connext/nxtp-* packages.
+  - language: javascript
+    registry: npm
+    name: '@connext/types'
+    url: https://www.npmjs.com/package/@connext/types
+    install: npm install @connext/types
+    version: 7.3.17
+    official: true
+    scope: connext-vector
+    description: TypeScript typings for common Connext types.
+  - language: javascript
+    registry: npm
+    name: '@connext/client'
+    url: https://www.npmjs.com/package/@connext/client
+    install: npm install @connext/client
+    version: 7.3.17
+    official: true
+    scope: connext-vector
+    description: Client for Connext Network (state-channel generation).
+  - language: javascript
+    registry: npm
+    name: '@connext/interfaces'
+    url: https://www.npmjs.com/package/@connext/interfaces
+    install: npm install @connext/interfaces
+    version: 2.0.5
+    official: true
+    scope: connext-amarok
+    repository: https://github.com/connext/interfaces
+    description: Minimal interfaces needed for integrations.
+  - language: javascript
+    registry: npm
+    name: '@everclear-org/contracts'
+    url: https://www.npmjs.com/package/@everclear-org/contracts
+    install: npm install @everclear-org/contracts
+    version: 0.0.1-alpha.0
+    official: true
+    scope: everclear
+    repository: https://github.com/defi-wonderland/chimera-monorepo
+    description: Smart contracts for Everclear.
+  - language: javascript
+    registry: npm
+    name: '@everclear-org/chainservice'
+    url: https://www.npmjs.com/package/@everclear-org/chainservice
+    install: npm install @everclear-org/chainservice
+    version: 0.0.1-alpha.0
+    official: true
+    scope: everclear
+    description: Chain service codebase for Everclear.
+  - language: javascript
+    registry: npm
+    name: '@everclear-org/utils'
+    url: https://www.npmjs.com/package/@everclear-org/utils
+    install: npm install @everclear-org/utils
+    version: 0.0.1-alpha.0
+    official: true
+    scope: everclear
+    description: Common utilities for use across Everclear packages.
+not_found:
+  - registry: pypi
+    note: No first-party Everclear or Connext Python client library published.
+  - registry: rubygems
+    note: No first-party package.
+  - registry: crates.io
+    note: No first-party package.
+  - registry: maven-central
+    note: No first-party package.
+  - registry: nuget
+    note: No first-party package.
+  - registry: pkg.go.dev
+    note: No first-party package.
