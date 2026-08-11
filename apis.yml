@@ -222,7 +222,7 @@ common:
 - type: Blog
   url: https://blog.connext.network/
 - type: OpenAPI
-  url: openapi/connext-everclear-openapi.yml
+  url: openapi/_original/connext-everclear-openapi.yml
 - type: Overlay
   url: overlays/connext-everclear-overlay.yaml
 - type: GraphQL
