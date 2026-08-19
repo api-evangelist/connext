@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Chimera Invoices API
   version: 1.0.0
@@ -71,13 +71,15 @@ paths:
                     items:
                       $ref: '#/components/schemas/Invoice'
                   nextCursor:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     required: true
-                    nullable: true
                   prevCursor:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     required: true
-                    nullable: true
                   maxCount:
                     type: number
                     required: true
@@ -281,7 +283,6 @@ components:
         hub_status:
           $ref: '#/components/schemas/IntentStatus'
           description: The status of the intent on Hub domain
-          nullable: true
         ticker_hash:
           type: string
         hub_invoice_enqueued_timestamp:

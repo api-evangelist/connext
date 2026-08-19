@@ -1,0 +1,364 @@
+{
+  "item": [
+    {
+      "id": "e77d8b7d-3478-42e2-b752-c8b00d048113",
+      "name": "Routes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "29dba732-16cc-479c-844e-7eddecc66051",
+          "name": "Get quote for a route, including fees and limits",
+          "request": {
+            "name": "Get quote for a route, including fees and limits",
+            "description": {},
+            "url": {
+              "path": [
+                "routes",
+                "quotes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"origin\": \"<string>\",\n  \"destinations\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"inputAsset\": \"<string>\",\n  \"amount\": \"<string>\",\n  \"outputAsset\": \"<string>\",\n  \"to\": \"<string>\",\n  \"from\": \"<string>\",\n  \"order_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "faec6129-a840-4b7b-b2e2-13efff4d07a5",
+              "name": "Successfully retrieved quote.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "routes",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"origin\": \"<string>\",\n  \"destinations\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"inputAsset\": \"<string>\",\n  \"amount\": \"<string>\",\n  \"outputAsset\": \"<string>\",\n  \"to\": \"<string>\",\n  \"from\": \"<string>\",\n  \"order_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fixedFeeUnits\": \"string\",\n  \"variableFeeBps\": 7506.80888004798,\n  \"totalFeeBps\": 6473.2536119903,\n  \"currentLimit\": \"string\",\n  \"reqType\": \"string\",\n  \"splitCount\": 6951,\n  \"expectedAmount\": \"string\",\n  \"fastPathQuote\": {\n    \"fixedFeeUnits\": \"string\",\n    \"variableFeeBps\": 6091.911329239237,\n    \"totalFeeBps\": 7707.967086455584,\n    \"expectedAmount\": \"string\",\n    \"expectedFillTime\": \"string\"\n  },\n  \"settlementEstimate\": {\n    \"p25Minutes\": 135.69884318445747,\n    \"p50Minutes\": 7882.205131982018,\n    \"p75Minutes\": 5097.5445947843455\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7167ad38-4f06-4f58-9d7c-19eef6425014",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "routes",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"origin\": \"<string>\",\n  \"destinations\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"inputAsset\": \"<string>\",\n  \"amount\": \"<string>\",\n  \"outputAsset\": \"<string>\",\n  \"to\": \"<string>\",\n  \"from\": \"<string>\",\n  \"order_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "70a298a2-6094-426d-b339-39b481a322b2",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "routes",
+                    "quotes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"origin\": \"<string>\",\n  \"destinations\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"inputAsset\": \"<string>\",\n  \"amount\": \"<string>\",\n  \"outputAsset\": \"<string>\",\n  \"to\": \"<string>\",\n  \"from\": \"<string>\",\n  \"order_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "64e75df2-8e0f-4cd1-93c4-22f4ad95a268",
+          "name": "Get current limits for a route",
+          "request": {
+            "name": "Get current limits for a route",
+            "description": {},
+            "url": {
+              "path": [
+                "routes",
+                "limits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"origin\": \"<string>\",\n  \"destinations\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"inputAsset\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0b382ebb-6b62-4d16-8c0e-c25265b719ca",
+              "name": "Successfully retrieved limits.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "routes",
+                    "limits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"origin\": \"<string>\",\n  \"destinations\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"inputAsset\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"currentLimit\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd2b0b12-bad5-41cf-812b-326d40d31652",
+              "name": "Invalid request parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "routes",
+                    "limits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"origin\": \"<string>\",\n  \"destinations\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"inputAsset\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "26689d73-9cc4-4744-b767-70cc4b1675a8",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "routes",
+                    "limits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"origin\": \"<string>\",\n  \"destinations\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"inputAsset\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.testnet.everclear.org",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ea534e3c-128a-4ea6-b149-3a22bbad18a0",
+    "name": "Chimera Routes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

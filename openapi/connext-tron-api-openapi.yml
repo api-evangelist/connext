@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Chimera Tron API
   version: 1.0.0
@@ -33,7 +33,6 @@ paths:
                   type: array
                   items:
                     type: string
-                  nullable: false
                 to:
                   type: string
                 from:
@@ -124,11 +123,13 @@ components:
       type: object
       properties:
         to:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         from:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         nonce:
           type: string
           format: bigint
@@ -147,10 +148,13 @@ components:
         chainId:
           type: integer
         type:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         accessList:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: object
             properties:
@@ -160,22 +164,25 @@ components:
                 type: array
                 items:
                   type: string
-          nullable: true
         maxPriorityFeePerGas:
-          type: string
+          type:
+          - string
+          - 'null'
           format: bigint
-          nullable: true
         maxFeePerGas:
-          type: string
+          type:
+          - string
+          - 'null'
           format: bigint
-          nullable: true
         customData:
-          type: object
+          type:
+          - object
+          - 'null'
           additionalProperties: true
-          nullable: true
         ccipReadEnabled:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
       required:
       - to
       - data

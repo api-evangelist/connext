@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Chimera Intents API
   version: 1.0.0
@@ -161,13 +161,15 @@ paths:
                     items:
                       $ref: '#/components/schemas/Intent'
                   nextCursor:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     required: true
-                    nullable: true
                   prevCursor:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     required: true
-                    nullable: true
                   maxCount:
                     type: number
                     required: true
@@ -344,11 +346,13 @@ components:
       type: object
       properties:
         to:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         from:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         nonce:
           type: string
           format: bigint
@@ -367,10 +371,13 @@ components:
         chainId:
           type: integer
         type:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
         accessList:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: object
             properties:
@@ -380,85 +387,29 @@ components:
                 type: array
                 items:
                   type: string
-          nullable: true
         maxPriorityFeePerGas:
-          type: string
+          type:
+          - string
+          - 'null'
           format: bigint
-          nullable: true
         maxFeePerGas:
-          type: string
+          type:
+          - string
+          - 'null'
           format: bigint
-          nullable: true
         customData:
-          type: object
+          type:
+          - object
+          - 'null'
           additionalProperties: true
-          nullable: true
         ccipReadEnabled:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
       required:
       - to
       - data
       - chainId
-    IntentRequest:
-      type: object
-      required:
-      - origin
-      - destinations
-      - to
-      - inputAsset
-      - amount
-      - callData
-      properties:
-        origin:
-          type: string
-        destinations:
-          type: array
-          items:
-            type: string
-          nullable: false
-        to:
-          type: string
-        from:
-          type: string
-          description: intent creator address
-        inputAsset:
-          type: string
-        outputAsset:
-          type: string
-        amount:
-          type: string
-          format: bigint
-          description: Input asset amount, denominated in the asset's decimal units on the origin chain
-        callData:
-          type: string
-        ttl:
-          type: integer
-          description: Time-to-live in seconds for fast-path execution (optional)
-        max_fee:
-          type: string
-          description: Max Fees used in intent system (depricated after swaps)
-        permit2Params:
-          type: object
-          properties:
-            nonce:
-              type: string
-              format: bigint
-            deadline:
-              type: string
-              format: bigint
-            signature:
-              type: string
-          required:
-          - nonce
-          - deadline
-          - signature
-        order_id:
-          type: string
-          description: Order ID for newOrder requests
-        isFastPath:
-          type: boolean
-          description: Boolean for sending intent through fast path
     Intent:
       type: object
       properties:
@@ -466,8 +417,9 @@ components:
           type: string
           description: A string representing the intent ID
         batch_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: A string representing the batch ID
         queue_idx:
           type: integer
@@ -492,8 +444,9 @@ components:
           type: string
           description: Origin amount
         destination_amount:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Destination amount
         origin:
           type: string
@@ -511,26 +464,29 @@ components:
           type: string
           description: Transaction hash (intent_created tx hash)
         receive_tx_hash:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Receive transaction hash
         intent_created_timestamp:
           type: integer
           format: int64
           description: Intent Created timestamp
         settlement_timestamp:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int64
-          nullable: true
           description: Receive timestamp
         intent_created_block_number:
           type: integer
           format: int64
           description: Intent created block number
         receive_blocknumber:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int64
-          nullable: true
           description: Receive block number
         tx_origin:
           type: string
@@ -547,105 +503,128 @@ components:
           type: string
           description: amount_out_min used in intent
         call_data:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Call data
         filled:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
           description: Filler address
         initiator:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Initiator address
         native_fee:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Native fee
         token_fee:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Token fee
         fee_adapter_initiator:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Fee adapter initiator address
         origin_gas_fees:
           type: string
           description: Origin gas fees
         destination_gas_fees:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Destination gas fees
         hub_settlement_domain:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Settlement domain for an intent
-          nullable: true
         ttl:
-          type: number
+          type:
+          - number
+          - 'null'
           description: TTL set for an intent
-          nullable: true
         is_fast_path:
           type: boolean
           description: Is the intent for fast path service
         fill_solver:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Solver/filler address on destination domain
         fill_domain:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Destination domain that was actually filled
         fill_destinations:
-          type: array
-          nullable: true
+          type:
+          - array
+          - 'null'
           items:
             type: string
           description: All destination domains from the destination leg
         fill_transaction_hash:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Destination chain transaction hash for fill
         fill_timestamp:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int64
-          nullable: true
           description: Timestamp when destination was filled
         fill_amount:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Amount filled on destination chain (raw units)
         fill_fee_token:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Fee charged on destination chain in token terms
         fill_fee_dbps:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Fee charged on destination chain in dbps
         fill_input_asset:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Input asset used on destination chain
         fill_output_asset:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Output asset received on destination chain
         fill_sender:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: EOA/contract that submitted destination tx
         fill_status:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Status of the destination leg
         fill_initiator:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Initiator for the destination leg
         fill_receiver:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Receiver for the destination leg
         max_fee:
           type: string
@@ -691,3 +670,61 @@ components:
       - DISPATCHED_HUB
       - DISPATCHED_SPOKE
       - DISPATCHED_UNSUPPORTED
+    IntentRequest:
+      type: object
+      required:
+      - origin
+      - destinations
+      - to
+      - inputAsset
+      - amount
+      - callData
+      properties:
+        origin:
+          type: string
+        destinations:
+          type: array
+          items:
+            type: string
+        to:
+          type: string
+        from:
+          type: string
+          description: intent creator address
+        inputAsset:
+          type: string
+        outputAsset:
+          type: string
+        amount:
+          type: string
+          format: bigint
+          description: Input asset amount, denominated in the asset's decimal units on the origin chain
+        callData:
+          type: string
+        ttl:
+          type: integer
+          description: Time-to-live in seconds for fast-path execution (optional)
+        max_fee:
+          type: string
+          description: Max Fees used in intent system (depricated after swaps)
+        permit2Params:
+          type: object
+          properties:
+            nonce:
+              type: string
+              format: bigint
+            deadline:
+              type: string
+              format: bigint
+            signature:
+              type: string
+          required:
+          - nonce
+          - deadline
+          - signature
+        order_id:
+          type: string
+          description: Order ID for newOrder requests
+        isFastPath:
+          type: boolean
+          description: Boolean for sending intent through fast path

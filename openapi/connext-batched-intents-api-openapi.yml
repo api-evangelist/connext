@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Chimera Batched Intents API
   version: 1.0.0
@@ -137,9 +137,10 @@ paths:
                           intent:
                             $ref: '#/components/schemas/Intent'
                   nextCursor:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     required: true
-                    nullable: true
         '400':
           description: Invalid input
           content:
@@ -223,6 +224,25 @@ paths:
       - Batched Intents
 components:
   schemas:
+    IntentStatus:
+      type: string
+      enum:
+      - NONE
+      - ADDED
+      - ADDED_SPOKE
+      - ADDED_HUB
+      - DEPOSIT_PROCESSED
+      - FILLED
+      - ADDED_AND_FILLED
+      - INVOICED
+      - SETTLED
+      - SETTLED_AND_COMPLETED
+      - SETTLED_AND_MANUALLY_EXECUTED
+      - UNSUPPORTED
+      - UNSUPPORTED_RETURNED
+      - DISPATCHED_HUB
+      - DISPATCHED_SPOKE
+      - DISPATCHED_UNSUPPORTED
     Intent:
       type: object
       properties:
@@ -230,8 +250,9 @@ components:
           type: string
           description: A string representing the intent ID
         batch_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: A string representing the batch ID
         queue_idx:
           type: integer
@@ -256,8 +277,9 @@ components:
           type: string
           description: Origin amount
         destination_amount:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Destination amount
         origin:
           type: string
@@ -275,26 +297,29 @@ components:
           type: string
           description: Transaction hash (intent_created tx hash)
         receive_tx_hash:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Receive transaction hash
         intent_created_timestamp:
           type: integer
           format: int64
           description: Intent Created timestamp
         settlement_timestamp:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int64
-          nullable: true
           description: Receive timestamp
         intent_created_block_number:
           type: integer
           format: int64
           description: Intent created block number
         receive_blocknumber:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int64
-          nullable: true
           description: Receive block number
         tx_origin:
           type: string
@@ -311,105 +336,128 @@ components:
           type: string
           description: amount_out_min used in intent
         call_data:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Call data
         filled:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
           description: Filler address
         initiator:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Initiator address
         native_fee:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Native fee
         token_fee:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Token fee
         fee_adapter_initiator:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Fee adapter initiator address
         origin_gas_fees:
           type: string
           description: Origin gas fees
         destination_gas_fees:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Destination gas fees
         hub_settlement_domain:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Settlement domain for an intent
-          nullable: true
         ttl:
-          type: number
+          type:
+          - number
+          - 'null'
           description: TTL set for an intent
-          nullable: true
         is_fast_path:
           type: boolean
           description: Is the intent for fast path service
         fill_solver:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Solver/filler address on destination domain
         fill_domain:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Destination domain that was actually filled
         fill_destinations:
-          type: array
-          nullable: true
+          type:
+          - array
+          - 'null'
           items:
             type: string
           description: All destination domains from the destination leg
         fill_transaction_hash:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Destination chain transaction hash for fill
         fill_timestamp:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int64
-          nullable: true
           description: Timestamp when destination was filled
         fill_amount:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Amount filled on destination chain (raw units)
         fill_fee_token:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Fee charged on destination chain in token terms
         fill_fee_dbps:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Fee charged on destination chain in dbps
         fill_input_asset:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Input asset used on destination chain
         fill_output_asset:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Output asset received on destination chain
         fill_sender:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: EOA/contract that submitted destination tx
         fill_status:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Status of the destination leg
         fill_initiator:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Initiator for the destination leg
         fill_receiver:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Receiver for the destination leg
         max_fee:
           type: string
@@ -436,22 +484,3 @@ components:
       - amount_out_min
       - origin_gas_fees
       - ttl
-    IntentStatus:
-      type: string
-      enum:
-      - NONE
-      - ADDED
-      - ADDED_SPOKE
-      - ADDED_HUB
-      - DEPOSIT_PROCESSED
-      - FILLED
-      - ADDED_AND_FILLED
-      - INVOICED
-      - SETTLED
-      - SETTLED_AND_COMPLETED
-      - SETTLED_AND_MANUALLY_EXECUTED
-      - UNSUPPORTED
-      - UNSUPPORTED_RETURNED
-      - DISPATCHED_HUB
-      - DISPATCHED_SPOKE
-      - DISPATCHED_UNSUPPORTED

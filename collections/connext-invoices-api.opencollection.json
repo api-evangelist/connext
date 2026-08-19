@@ -1,0 +1,102 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Chimera Invoices API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Invoices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.testnet.everclear.org/invoices",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "prevCursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "tickerHash",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "origins",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "destinations",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOrderByDiscount",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves a paginated list of invoices in FIFO queue order"
+        },
+        {
+          "info": {
+            "name": "Return invoice details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.testnet.everclear.org/invoices/:intentId",
+            "params": [
+              {
+                "name": "intentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Fetches detailed information for a specified invoice by its intentID"
+        },
+        {
+          "info": {
+            "name": "Calculate minimum amounts needed to settle invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.testnet.everclear.org/invoices/:intentId/min-amounts",
+            "params": [
+              {
+                "name": "intentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Calculates the minimum amounts per destination domain to settle a specified invoice. This returns a map of destination domain to minimum amount required in standardized 1e18 decimals."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

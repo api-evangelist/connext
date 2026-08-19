@@ -1,0 +1,233 @@
+{
+  "item": [
+    {
+      "id": "d298f037-3971-4bfe-9a4f-c062e7bd6313",
+      "name": "Configs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "679e6cac-d03a-4865-9d50-db9755c644ef",
+          "name": "Get supported assets",
+          "request": {
+            "name": "Get supported assets",
+            "description": {
+              "content": "Lists assets supported by the protocol, with pagination and optional filtering by type",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "configs",
+                "assets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fc41cf5c-be3c-46d5-a86c-c3d17586b0fa",
+              "name": "Successful retrieval of assets",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "configs",
+                    "assets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"assets\": [\n    {\n      \"local\": \"string\",\n      \"adopted\": \"string\",\n      \"canonical_id\": \"string\",\n      \"canonical_domain\": \"string\",\n      \"domain\": \"string\",\n      \"key\": \"string\",\n      \"id\": \"string\",\n      \"decimal\": 188.34571685819034,\n      \"adopted_decimal\": 5743.93270027448\n    },\n    {\n      \"local\": \"string\",\n      \"adopted\": \"string\",\n      \"canonical_id\": \"string\",\n      \"canonical_domain\": \"string\",\n      \"domain\": \"string\",\n      \"key\": \"string\",\n      \"id\": \"string\",\n      \"decimal\": 1290.622738586995,\n      \"adopted_decimal\": 6121.747781678876\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4bcfaf0f-7b5d-4ade-b519-d5470a92d379",
+              "name": "Invalid Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "configs",
+                    "assets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bbf6f593-a871-4a56-8cc0-9806c364f56c",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "configs",
+                    "assets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.testnet.everclear.org",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4f60e296-62de-4a80-bc44-a024102d1995",
+    "name": "Chimera Configs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

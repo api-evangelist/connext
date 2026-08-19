@@ -1,0 +1,238 @@
+{
+  "item": [
+    {
+      "id": "844b8ea9-2d7e-4f94-9453-2dd118a2c275",
+      "name": "History",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5a5f5a07-67aa-420e-a1fd-836ef4ac30cc",
+          "name": "Get history of invoice processing",
+          "request": {
+            "name": "Get history of invoice processing",
+            "description": {
+              "content": "Retrieves detailed history of a specific invoice, including epochs and details of processing as deposit and invoice.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "history",
+                ":intentId",
+                "invoice-processing"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<number>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "intentId",
+                  "description": "(Required) Unique identifier for the intent."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fb8ea95f-d50e-4d63-ac55-5a083a98c7ee",
+              "name": "Successful response with history of invoice processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "history",
+                    ":intentId",
+                    "invoice-processing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "intentId",
+                      "description": "(Required) Unique identifier for the intent."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"invoiceProcessingHistory\": [\n    {\n      \"epoch\": 3211,\n      \"domain\": 2580,\n      \"custodiedAssets\": 3674.6682121187237,\n      \"amountToBeDiscounted\": 5098.039213581575,\n      \"rewardsForDepositors\": 5962.756970994595,\n      \"amountAfterDiscount\": 3329.277695575754,\n      \"discountdbps\": 9254,\n      \"selectedDestinationDomain\": 586,\n      \"selectedDestinationDomainLiquidity\": 6584.0239907227415,\n      \"timestamp\": \"string\"\n    },\n    {\n      \"epoch\": 4241,\n      \"domain\": 6816,\n      \"custodiedAssets\": 8526.974822242903,\n      \"amountToBeDiscounted\": 7676.902993417404,\n      \"rewardsForDepositors\": 7656.4064681679865,\n      \"amountAfterDiscount\": 7168.3598771760335,\n      \"discountdbps\": 731,\n      \"selectedDestinationDomain\": 8669,\n      \"selectedDestinationDomainLiquidity\": 5616.881977794851,\n      \"timestamp\": \"string\"\n    }\n  ],\n  \"nextCursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df8c640e-0fa4-4576-8176-00831244dc57",
+              "name": "Invalid chain or asset parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "history",
+                    ":intentId",
+                    "invoice-processing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "intentId",
+                      "description": "(Required) Unique identifier for the intent."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c9b28e7a-d2ef-4adf-aebf-a7c883bae167",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "history",
+                    ":intentId",
+                    "invoice-processing"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "intentId",
+                      "description": "(Required) Unique identifier for the intent."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.testnet.everclear.org",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ff8bcb6a-623c-4ad0-99a4-ff2f00778bff",
+    "name": "Chimera History API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

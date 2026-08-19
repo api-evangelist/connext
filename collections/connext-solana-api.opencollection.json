@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Chimera Solana API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Solana",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new intent on Solana",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.testnet.everclear.org/solana/intents",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits a new intent transaction to the Solana blockchain using the specified parameters and configuration."
+        },
+        {
+          "info": {
+            "name": "To create lookup tables for new account + asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.testnet.everclear.org/solana/create-lookup-table",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creating lookup tables for new users to save account space on chain"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

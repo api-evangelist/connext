@@ -1,0 +1,115 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Chimera Batched Intents API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Batched Intents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get intents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.testnet.everclear.org/batched-intents",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "prevCursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "statuses",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "origins",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "destinations",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "allDestinations",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "txHash",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "userAddress",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "tickerHash",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "isFastPath",
+                "value": "",
+                "type": "query",
+                "description": "Filter for fast path intents (intents with TTL > 0)"
+              }
+            ]
+          },
+          "docs": "Retrieves a paginated list of intents based on query parameters"
+        },
+        {
+          "info": {
+            "name": "Get batched intents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.testnet.everclear.org/batched-intents/:batchId",
+            "params": [
+              {
+                "name": "batchId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of intents for a given batch ID"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

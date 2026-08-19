@@ -1,0 +1,685 @@
+{
+  "item": [
+    {
+      "id": "cc0a2ca8-f3b8-43d0-af63-0488f2c147bd",
+      "name": "Invoices",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "600d6d04-166a-4d40-ade7-f5f0ec7e7c52",
+          "name": "Get invoices",
+          "request": {
+            "name": "Get invoices",
+            "description": {
+              "content": "Retrieves a paginated list of invoices in FIFO queue order",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "invoices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "prevCursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "tickerHash",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "origins",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "origins",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "destinations",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "destinations",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortOrderByDiscount",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e7ad197a-4cb8-4cbf-8b9e-db1ceaf86581",
+              "name": "Successful retrieval of invoices",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prevCursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "tickerHash",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "origins",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "origins",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "destinations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "destinations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortOrderByDiscount",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"invoices\": [\n    {\n      \"intent_id\": \"string\",\n      \"owner\": \"string\",\n      \"entry_epoch\": 2373,\n      \"amount\": \"string\",\n      \"origin\": \"string\",\n      \"destinations\": [\n        \"string\",\n        \"string\"\n      ],\n      \"ticker_hash\": \"string\",\n      \"hub_invoice_enqueued_timestamp\": \"string\",\n      \"discountBps\": 5811,\n      \"hub_status\": \"UNSUPPORTED_RETURNED\"\n    },\n    {\n      \"intent_id\": \"string\",\n      \"owner\": \"string\",\n      \"entry_epoch\": 5607,\n      \"amount\": \"string\",\n      \"origin\": \"string\",\n      \"destinations\": [\n        \"string\",\n        \"string\"\n      ],\n      \"ticker_hash\": \"string\",\n      \"hub_invoice_enqueued_timestamp\": \"string\",\n      \"discountBps\": 3509,\n      \"hub_status\": \"ADDED\"\n    }\n  ],\n  \"nextCursor\": \"string\",\n  \"maxCount\": 8916.249317546792,\n  \"prevCursor\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "509e3b78-26bd-4c61-be94-541c6264fd1d",
+              "name": "Invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prevCursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "tickerHash",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "origins",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "origins",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "destinations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "destinations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortOrderByDiscount",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "714cde7e-252f-4bd1-99f9-2ad33ef63f5b",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prevCursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "tickerHash",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "origins",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "origins",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "destinations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "destinations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortOrderByDiscount",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f21628d-a4d7-4796-8da4-469efbb32bfa",
+          "name": "Return invoice details",
+          "request": {
+            "name": "Return invoice details",
+            "description": {
+              "content": "Fetches detailed information for a specified invoice by its intentID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "invoices",
+                ":intentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "intentId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8ad4c4cc-6554-4501-b884-9d7a388ee3ba",
+              "name": "Successful retrieval of invoice details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":intentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "intentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"invoice\": {\n    \"intent_id\": \"string\",\n    \"owner\": \"string\",\n    \"entry_epoch\": 4519,\n    \"amount\": \"string\",\n    \"origin\": \"string\",\n    \"destinations\": [\n      \"string\",\n      \"string\"\n    ],\n    \"ticker_hash\": \"string\",\n    \"hub_invoice_enqueued_timestamp\": \"string\",\n    \"discountBps\": 8500,\n    \"hub_status\": \"NONE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4036e5bc-ed3b-45ae-a4c0-ef3da35fbb08",
+              "name": "Invalid Intent ID",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":intentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "intentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0c1cb82-d41e-468e-b9be-bc2880c86e54",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":intentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "intentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4bc47057-266a-4f5f-8355-c81e6b89c184",
+          "name": "Calculate minimum amounts needed to settle invoice",
+          "request": {
+            "name": "Calculate minimum amounts needed to settle invoice",
+            "description": {
+              "content": "Calculates the minimum amounts per destination domain to settle a specified invoice. This returns a map of destination domain to minimum amount required in standardized 1e18 decimals.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "invoices",
+                ":intentId",
+                "min-amounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "intentId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ee7a7b41-cc59-445b-9a6a-178606a5b2cb",
+              "name": "Successful calculation of minimum amounts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":intentId",
+                    "min-amounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "intentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"invoiceAmount\": \"string\",\n  \"amountAfterDiscounts\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  },\n  \"discountBps\": \"string\",\n  \"custodiedAmounts\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"minAmounts\": {\n    \"key_0\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ffd6be6-f2ac-4321-ba5e-99e1689c63ac",
+              "name": "Invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":intentId",
+                    "min-amounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "intentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7949b666-bbdc-4102-8fa1-55c4715022fc",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "invoices",
+                    ":intentId",
+                    "min-amounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "intentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.testnet.everclear.org",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8f4b52de-bd8e-4760-a1f9-3332d8ca089a",
+    "name": "Chimera Invoices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

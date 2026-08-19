@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Chimera Tron API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tron",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new intent on Tron",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.testnet.everclear.org/tron/intents",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits a new intent transaction to the Tron blockchain using the specified parameters and configuration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

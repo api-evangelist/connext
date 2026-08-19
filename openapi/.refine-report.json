@@ -1,7 +1,14 @@
 {
   "provider": "connext",
   "sources": [
-    "connext-everclear-openapi.yml"
+    "connext-batched-intents-api-openapi.yml",
+    "connext-configs-api-openapi.yml",
+    "connext-history-api-openapi.yml",
+    "connext-intents-api-openapi.yml",
+    "connext-invoices-api-openapi.yml",
+    "connext-routes-api-openapi.yml",
+    "connext-solana-api-openapi.yml",
+    "connext-tron-api-openapi.yml"
   ],
   "outputs": [
     "connext-batched-intents-api-openapi.yml",
@@ -13,38 +20,19 @@
     "connext-solana-api-openapi.yml",
     "connext-tron-api-openapi.yml"
   ],
-  "archived": [
-    "archived openapi/connext-everclear-openapi.yml"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
-    "connext-everclear-openapi.yml: tagged paths POST /intents -> Intents",
-    "connext-everclear-openapi.yml: tagged paths GET /intents -> Intents",
-    "connext-everclear-openapi.yml: tagged paths GET /batched-intents -> Batched Intents",
-    "connext-everclear-openapi.yml: tagged paths GET /batched-intents/{batchId} -> Batched Intents",
-    "connext-everclear-openapi.yml: tagged paths POST /solana/intents -> Solana",
-    "connext-everclear-openapi.yml: tagged paths POST /solana/create-lookup-table -> Solana",
-    "connext-everclear-openapi.yml: tagged paths POST /tron/intents -> Tron",
-    "connext-everclear-openapi.yml: tagged paths GET /intents/{intentId} -> Intents",
-    "connext-everclear-openapi.yml: tagged paths POST /intents/{intentId}/execute -> Intents",
-    "connext-everclear-openapi.yml: tagged paths POST /intents/{intentId}/return-unsupported -> Intents",
-    "connext-everclear-openapi.yml: tagged paths GET /invoices -> Invoices",
-    "connext-everclear-openapi.yml: tagged paths GET /invoices/{intentId} -> Invoices",
-    "connext-everclear-openapi.yml: tagged paths GET /invoices/{intentId}/min-amounts -> Invoices",
-    "connext-everclear-openapi.yml: tagged paths GET /configs/assets -> Configs",
-    "connext-everclear-openapi.yml: tagged paths POST /routes/quotes -> Routes",
-    "connext-everclear-openapi.yml: tagged paths POST /routes/limits -> Routes",
-    "connext-everclear-openapi.yml: tagged paths GET /history/{intentId}/invoice-processing -> History",
-    "connext-everclear-openapi.yml: declared missing tag: Batched Intents",
-    "connext-everclear-openapi.yml: declared missing tag: Configs",
-    "connext-everclear-openapi.yml: declared missing tag: History",
-    "connext-everclear-openapi.yml: declared missing tag: Intents",
-    "connext-everclear-openapi.yml: declared missing tag: Invoices",
-    "connext-everclear-openapi.yml: declared missing tag: Routes",
-    "connext-everclear-openapi.yml: declared missing tag: Solana",
-    "connext-everclear-openapi.yml: declared missing tag: Tron",
-    "apis.yml register: written (+8 apis, 8 total)"
+    "connext-batched-intents-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "connext-configs-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "connext-history-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "connext-intents-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "connext-invoices-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "connext-routes-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "connext-solana-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "connext-tron-api-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
   ],
   "skipped": []
 }

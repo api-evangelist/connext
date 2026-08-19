@@ -1,0 +1,482 @@
+{
+  "item": [
+    {
+      "id": "4907723e-1819-42d5-a23c-e4c6dfcc4477",
+      "name": "Solana",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4abcbca9-91ab-4363-8cb4-d9af8e42ce91",
+          "name": "Create a new intent on Solana",
+          "request": {
+            "name": "Create a new intent on Solana",
+            "description": {
+              "content": "Submits a new intent transaction to the Solana blockchain using the specified parameters and configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "solana",
+                "intents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"origin\": \"<string>\",\n  \"destinations\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"to\": \"<string>\",\n  \"inputAsset\": \"<string>\",\n  \"amount\": \"<bigint>\",\n  \"callData\": \"<string>\",\n  \"maxFee\": \"<bigint>\",\n  \"user\": \"<string>\",\n  \"from\": \"<string>\",\n  \"userTokenAccountPublicKey\": \"<string>\",\n  \"programVaultAccountPublicKey\": \"<string>\",\n  \"permit2Params\": {\n    \"nonce\": \"<bigint>\",\n    \"deadline\": \"<bigint>\",\n    \"signature\": \"<string>\"\n  },\n  \"order_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b67d7ed6-59c7-4f44-b368-537e6055f27b",
+              "name": "Successfully created intent transaction",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "solana",
+                    "intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"origin\": \"<string>\",\n  \"destinations\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"to\": \"<string>\",\n  \"inputAsset\": \"<string>\",\n  \"amount\": \"<bigint>\",\n  \"callData\": \"<string>\",\n  \"maxFee\": \"<bigint>\",\n  \"user\": \"<string>\",\n  \"from\": \"<string>\",\n  \"userTokenAccountPublicKey\": \"<string>\",\n  \"programVaultAccountPublicKey\": \"<string>\",\n  \"permit2Params\": {\n    \"nonce\": \"<bigint>\",\n    \"deadline\": \"<bigint>\",\n    \"signature\": \"<string>\"\n  },\n  \"order_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"to\": null,\n  \"data\": \"string\",\n  \"chainId\": 9289,\n  \"from\": null,\n  \"nonce\": \"string\",\n  \"gasLimit\": \"string\",\n  \"gasPrice\": \"string\",\n  \"value\": \"string\",\n  \"type\": null,\n  \"accessList\": null,\n  \"maxPriorityFeePerGas\": \"string\",\n  \"maxFeePerGas\": null,\n  \"customData\": null,\n  \"ccipReadEnabled\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "29d5eace-5f57-4fd0-91e9-72d119c7bb4c",
+              "name": "Registries not found and deployed for given domain",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "solana",
+                    "intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"origin\": \"<string>\",\n  \"destinations\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"to\": \"<string>\",\n  \"inputAsset\": \"<string>\",\n  \"amount\": \"<bigint>\",\n  \"callData\": \"<string>\",\n  \"maxFee\": \"<bigint>\",\n  \"user\": \"<string>\",\n  \"from\": \"<string>\",\n  \"userTokenAccountPublicKey\": \"<string>\",\n  \"programVaultAccountPublicKey\": \"<string>\",\n  \"permit2Params\": {\n    \"nonce\": \"<bigint>\",\n    \"deadline\": \"<bigint>\",\n    \"signature\": \"<string>\"\n  },\n  \"order_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6031196-2dc3-4e90-9591-0b1dc56d3661",
+              "name": "Registries not found and deployed for given domain",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "solana",
+                    "intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"origin\": \"<string>\",\n  \"destinations\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"to\": \"<string>\",\n  \"inputAsset\": \"<string>\",\n  \"amount\": \"<bigint>\",\n  \"callData\": \"<string>\",\n  \"maxFee\": \"<bigint>\",\n  \"user\": \"<string>\",\n  \"from\": \"<string>\",\n  \"userTokenAccountPublicKey\": \"<string>\",\n  \"programVaultAccountPublicKey\": \"<string>\",\n  \"permit2Params\": {\n    \"nonce\": \"<bigint>\",\n    \"deadline\": \"<bigint>\",\n    \"signature\": \"<string>\"\n  },\n  \"order_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ffc69ab-a3f0-40cf-855f-a2a573e1e57d",
+              "name": "Registries not found and deployed for given domain",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "solana",
+                    "intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"origin\": \"<string>\",\n  \"destinations\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"to\": \"<string>\",\n  \"inputAsset\": \"<string>\",\n  \"amount\": \"<bigint>\",\n  \"callData\": \"<string>\",\n  \"maxFee\": \"<bigint>\",\n  \"user\": \"<string>\",\n  \"from\": \"<string>\",\n  \"userTokenAccountPublicKey\": \"<string>\",\n  \"programVaultAccountPublicKey\": \"<string>\",\n  \"permit2Params\": {\n    \"nonce\": \"<bigint>\",\n    \"deadline\": \"<bigint>\",\n    \"signature\": \"<string>\"\n  },\n  \"order_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0c1e26d9-c075-4dd4-9029-95eaed2a16d3",
+          "name": "To create lookup tables for new account + asset",
+          "request": {
+            "name": "To create lookup tables for new account + asset",
+            "description": {
+              "content": "Creating lookup tables for new users to save account space on chain",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "solana",
+                "create-lookup-table"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inputAsset\": \"<string>\",\n  \"user\": \"<string>\",\n  \"userTokenAccountPublicKey\": \"<string>\",\n  \"programVaultAccountPublicKey\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b6db45d9-c5fe-4d03-9881-2e67286cbb7c",
+              "name": "Succesfull serialise data fetch transaction data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "solana",
+                    "create-lookup-table"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputAsset\": \"<string>\",\n  \"user\": \"<string>\",\n  \"userTokenAccountPublicKey\": \"<string>\",\n  \"programVaultAccountPublicKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"to\": null,\n  \"data\": \"string\",\n  \"chainId\": 9289,\n  \"from\": null,\n  \"nonce\": \"string\",\n  \"gasLimit\": \"string\",\n  \"gasPrice\": \"string\",\n  \"value\": \"string\",\n  \"type\": null,\n  \"accessList\": null,\n  \"maxPriorityFeePerGas\": \"string\",\n  \"maxFeePerGas\": null,\n  \"customData\": null,\n  \"ccipReadEnabled\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0aed9441-6725-41cc-a5f4-2f6050d75a24",
+              "name": "Registries not found and deployed for given domain",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "solana",
+                    "create-lookup-table"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputAsset\": \"<string>\",\n  \"user\": \"<string>\",\n  \"userTokenAccountPublicKey\": \"<string>\",\n  \"programVaultAccountPublicKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cdde7956-1b3f-4abf-90b5-f003023fe154",
+              "name": "Registries not found and deployed for given domain",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "solana",
+                    "create-lookup-table"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputAsset\": \"<string>\",\n  \"user\": \"<string>\",\n  \"userTokenAccountPublicKey\": \"<string>\",\n  \"programVaultAccountPublicKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e223a6e-5d47-4ff2-bd0e-8e6c876175af",
+              "name": "Registries not found and deployed for given domain",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "solana",
+                    "create-lookup-table"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputAsset\": \"<string>\",\n  \"user\": \"<string>\",\n  \"userTokenAccountPublicKey\": \"<string>\",\n  \"programVaultAccountPublicKey\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.testnet.everclear.org",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2a4c783e-761e-486b-8cca-14611a350f61",
+    "name": "Chimera Solana API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

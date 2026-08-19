@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Chimera History API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "History",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get history of invoice processing",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.testnet.everclear.org/history/:intentId/invoice-processing",
+            "params": [
+              {
+                "name": "intentId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the intent."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves detailed history of a specific invoice, including epochs and details of processing as deposit and invoice."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

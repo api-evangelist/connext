@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Chimera Routes API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Routes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get quote for a route, including fees and limits",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.testnet.everclear.org/routes/quotes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get quote for a route, including fees and limits"
+        },
+        {
+          "info": {
+            "name": "Get current limits for a route",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.testnet.everclear.org/routes/limits",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get current limits for a route"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Chimera History API
   version: 1.0.0
@@ -92,8 +92,9 @@ paths:
                         timestamp:
                           type: string
                   nextCursor:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
         '400':
           description: Invalid chain or asset parameter.
         '500':

@@ -1,0 +1,642 @@
+{
+  "item": [
+    {
+      "id": "d38b1257-7887-4178-b0a7-58350888428b",
+      "name": "Batched Intents",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "71a9cb7c-663f-4fac-a345-1dbec51e63ed",
+          "name": "Get intents",
+          "request": {
+            "name": "Get intents",
+            "description": {
+              "content": "Retrieves a paginated list of intents based on query parameters",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "batched-intents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "prevCursor",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "statuses",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "statuses",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "origins",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "origins",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "destinations",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "destinations",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "allDestinations",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "allDestinations",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "txHash",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "userAddress",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "tickerHash",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "isFastPath",
+                  "value": "<boolean>",
+                  "description": "Filter for fast path intents (intents with TTL > 0)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9fcff0ef-9128-4f64-bd92-e9c5c5510923",
+              "name": "Successful retrieval of intents",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batched-intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prevCursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "origins",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "origins",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "destinations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "destinations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "allDestinations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "allDestinations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "txHash",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userAddress",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tickerHash",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "isFastPath",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"type\": \"batch\",\n      \"batchId\": \"string\",\n      \"intents\": [\n        {\n          \"intent_id\": \"string\",\n          \"queue_idx\": 5081,\n          \"message_id\": \"string\",\n          \"status\": \"SETTLED_AND_MANUALLY_EXECUTED\",\n          \"receiver\": \"string\",\n          \"input_asset\": \"string\",\n          \"output_asset\": \"string\",\n          \"origin_amount\": \"string\",\n          \"origin\": \"string\",\n          \"destinations\": [\n            \"string\",\n            \"string\"\n          ],\n          \"nonce\": 821,\n          \"transaction_hash\": \"string\",\n          \"intent_created_timestamp\": 4979,\n          \"intent_created_block_number\": 5931,\n          \"tx_origin\": \"string\",\n          \"tx_nonce\": 2685,\n          \"auto_id\": 9118,\n          \"amount_out_min\": \"string\",\n          \"origin_gas_fees\": \"string\",\n          \"ttl\": null,\n          \"batch_id\": \"string\",\n          \"destination_amount\": \"string\",\n          \"receive_tx_hash\": \"string\",\n          \"settlement_timestamp\": 2722,\n          \"receive_blocknumber\": 8943,\n          \"call_data\": \"string\",\n          \"filled\": false,\n          \"initiator\": null,\n          \"native_fee\": \"string\",\n          \"token_fee\": null,\n          \"fee_adapter_initiator\": \"string\",\n          \"destination_gas_fees\": \"string\",\n          \"hub_settlement_domain\": null,\n          \"is_fast_path\": false,\n          \"fill_solver\": null,\n          \"fill_domain\": null,\n          \"fill_destinations\": null,\n          \"fill_transaction_hash\": null,\n          \"fill_timestamp\": null,\n          \"fill_amount\": \"string\",\n          \"fill_fee_token\": null,\n          \"fill_fee_dbps\": null,\n          \"fill_input_asset\": null,\n          \"fill_output_asset\": \"string\",\n          \"fill_sender\": \"string\",\n          \"fill_status\": null,\n          \"fill_initiator\": \"string\",\n          \"fill_receiver\": \"string\",\n          \"max_fee\": \"string\"\n        },\n        {\n          \"intent_id\": \"string\",\n          \"queue_idx\": 5849,\n          \"message_id\": \"string\",\n          \"status\": \"UNSUPPORTED_RETURNED\",\n          \"receiver\": \"string\",\n          \"input_asset\": \"string\",\n          \"output_asset\": \"string\",\n          \"origin_amount\": \"string\",\n          \"origin\": \"string\",\n          \"destinations\": [\n            \"string\",\n            \"string\"\n          ],\n          \"nonce\": 5481,\n          \"transaction_hash\": \"string\",\n          \"intent_created_timestamp\": 4802,\n          \"intent_created_block_number\": 4204,\n          \"tx_origin\": \"string\",\n          \"tx_nonce\": 4891,\n          \"auto_id\": 2701,\n          \"amount_out_min\": \"string\",\n          \"origin_gas_fees\": \"string\",\n          \"ttl\": null,\n          \"batch_id\": \"string\",\n          \"destination_amount\": \"string\",\n          \"receive_tx_hash\": \"string\",\n          \"settlement_timestamp\": 1929,\n          \"receive_blocknumber\": 6944,\n          \"call_data\": null,\n          \"filled\": null,\n          \"initiator\": null,\n          \"native_fee\": null,\n          \"token_fee\": null,\n          \"fee_adapter_initiator\": null,\n          \"destination_gas_fees\": null,\n          \"hub_settlement_domain\": null,\n          \"is_fast_path\": true,\n          \"fill_solver\": \"string\",\n          \"fill_domain\": null,\n          \"fill_destinations\": [\n            \"string\",\n            \"string\"\n          ],\n          \"fill_transaction_hash\": \"string\",\n          \"fill_timestamp\": 3350,\n          \"fill_amount\": \"string\",\n          \"fill_fee_token\": null,\n          \"fill_fee_dbps\": \"string\",\n          \"fill_input_asset\": null,\n          \"fill_output_asset\": \"string\",\n          \"fill_sender\": null,\n          \"fill_status\": null,\n          \"fill_initiator\": \"string\",\n          \"fill_receiver\": null,\n          \"max_fee\": \"string\"\n        }\n      ],\n      \"token_fee\": \"string\",\n      \"native_fee\": \"string\"\n    },\n    {\n      \"type\": \"batch\",\n      \"batchId\": \"string\",\n      \"intents\": [\n        {\n          \"intent_id\": \"string\",\n          \"queue_idx\": 428,\n          \"message_id\": \"string\",\n          \"status\": \"FILLED\",\n          \"receiver\": \"string\",\n          \"input_asset\": \"string\",\n          \"output_asset\": \"string\",\n          \"origin_amount\": \"string\",\n          \"origin\": \"string\",\n          \"destinations\": [\n            \"string\",\n            \"string\"\n          ],\n          \"nonce\": 1369,\n          \"transaction_hash\": \"string\",\n          \"intent_created_timestamp\": 4306,\n          \"intent_created_block_number\": 6677,\n          \"tx_origin\": \"string\",\n          \"tx_nonce\": 2967,\n          \"auto_id\": 223,\n          \"amount_out_min\": \"string\",\n          \"origin_gas_fees\": \"string\",\n          \"ttl\": null,\n          \"batch_id\": null,\n          \"destination_amount\": null,\n          \"receive_tx_hash\": null,\n          \"settlement_timestamp\": null,\n          \"receive_blocknumber\": null,\n          \"call_data\": \"string\",\n          \"filled\": true,\n          \"initiator\": \"string\",\n          \"native_fee\": \"string\",\n          \"token_fee\": null,\n          \"fee_adapter_initiator\": null,\n          \"destination_gas_fees\": null,\n          \"hub_settlement_domain\": null,\n          \"is_fast_path\": true,\n          \"fill_solver\": \"string\",\n          \"fill_domain\": null,\n          \"fill_destinations\": [\n            \"string\",\n            \"string\"\n          ],\n          \"fill_transaction_hash\": \"string\",\n          \"fill_timestamp\": 538,\n          \"fill_amount\": null,\n          \"fill_fee_token\": null,\n          \"fill_fee_dbps\": \"string\",\n          \"fill_input_asset\": \"string\",\n          \"fill_output_asset\": null,\n          \"fill_sender\": \"string\",\n          \"fill_status\": null,\n          \"fill_initiator\": null,\n          \"fill_receiver\": \"string\",\n          \"max_fee\": \"string\"\n        },\n        {\n          \"intent_id\": \"string\",\n          \"queue_idx\": 8150,\n          \"message_id\": \"string\",\n          \"status\": \"ADDED_SPOKE\",\n          \"receiver\": \"string\",\n          \"input_asset\": \"string\",\n          \"output_asset\": \"string\",\n          \"origin_amount\": \"string\",\n          \"origin\": \"string\",\n          \"destinations\": [\n            \"string\",\n            \"string\"\n          ],\n          \"nonce\": 131,\n          \"transaction_hash\": \"string\",\n          \"intent_created_timestamp\": 6116,\n          \"intent_created_block_number\": 7329,\n          \"tx_origin\": \"string\",\n          \"tx_nonce\": 231,\n          \"auto_id\": 310,\n          \"amount_out_min\": \"string\",\n          \"origin_gas_fees\": \"string\",\n          \"ttl\": null,\n          \"batch_id\": \"string\",\n          \"destination_amount\": \"string\",\n          \"receive_tx_hash\": null,\n          \"settlement_timestamp\": 5388,\n          \"receive_blocknumber\": null,\n          \"call_data\": \"string\",\n          \"filled\": null,\n          \"initiator\": \"string\",\n          \"native_fee\": \"string\",\n          \"token_fee\": null,\n          \"fee_adapter_initiator\": null,\n          \"destination_gas_fees\": null,\n          \"hub_settlement_domain\": \"string\",\n          \"is_fast_path\": true,\n          \"fill_solver\": null,\n          \"fill_domain\": \"string\",\n          \"fill_destinations\": null,\n          \"fill_transaction_hash\": \"string\",\n          \"fill_timestamp\": 930,\n          \"fill_amount\": null,\n          \"fill_fee_token\": null,\n          \"fill_fee_dbps\": null,\n          \"fill_input_asset\": null,\n          \"fill_output_asset\": null,\n          \"fill_sender\": \"string\",\n          \"fill_status\": \"string\",\n          \"fill_initiator\": \"string\",\n          \"fill_receiver\": \"string\",\n          \"max_fee\": \"string\"\n        }\n      ],\n      \"token_fee\": \"string\",\n      \"native_fee\": \"string\"\n    }\n  ],\n  \"nextCursor\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b1bdfaf1-abbe-40e4-afb6-3bb532f0239d",
+              "name": "Invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batched-intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prevCursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "origins",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "origins",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "destinations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "destinations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "allDestinations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "allDestinations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "txHash",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userAddress",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tickerHash",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "isFastPath",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "101195e3-f010-4a91-9721-8e39df91d3e5",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batched-intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prevCursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "origins",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "origins",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "destinations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "destinations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "allDestinations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "allDestinations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "txHash",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userAddress",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tickerHash",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "isFastPath",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "08ff8a5d-2e97-41de-8632-0f5cf6bed6e4",
+          "name": "Get batched intents",
+          "request": {
+            "name": "Get batched intents",
+            "description": {
+              "content": "Retrieves a list of intents for a given batch ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "batched-intents",
+                ":batchId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "batchId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ac17360f-765b-4dbe-9e60-c5ce47ecc856",
+              "name": "Successful retrieval of intents",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batched-intents",
+                    ":batchId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "batchId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"batchId\": \"string\",\n  \"intents\": [\n    {\n      \"intent_id\": \"string\",\n      \"queue_idx\": 3185,\n      \"message_id\": \"string\",\n      \"status\": \"DISPATCHED_HUB\",\n      \"receiver\": \"string\",\n      \"input_asset\": \"string\",\n      \"output_asset\": \"string\",\n      \"origin_amount\": \"string\",\n      \"origin\": \"string\",\n      \"destinations\": [\n        \"string\",\n        \"string\"\n      ],\n      \"nonce\": 9895,\n      \"transaction_hash\": \"string\",\n      \"intent_created_timestamp\": 5778,\n      \"intent_created_block_number\": 5210,\n      \"tx_origin\": \"string\",\n      \"tx_nonce\": 5251,\n      \"auto_id\": 9612,\n      \"amount_out_min\": \"string\",\n      \"origin_gas_fees\": \"string\",\n      \"ttl\": 1009.1545251606982,\n      \"batch_id\": null,\n      \"destination_amount\": null,\n      \"receive_tx_hash\": \"string\",\n      \"settlement_timestamp\": null,\n      \"receive_blocknumber\": 8381,\n      \"call_data\": \"string\",\n      \"filled\": false,\n      \"initiator\": \"string\",\n      \"native_fee\": null,\n      \"token_fee\": \"string\",\n      \"fee_adapter_initiator\": null,\n      \"destination_gas_fees\": \"string\",\n      \"hub_settlement_domain\": \"string\",\n      \"is_fast_path\": false,\n      \"fill_solver\": null,\n      \"fill_domain\": null,\n      \"fill_destinations\": null,\n      \"fill_transaction_hash\": null,\n      \"fill_timestamp\": null,\n      \"fill_amount\": \"string\",\n      \"fill_fee_token\": null,\n      \"fill_fee_dbps\": null,\n      \"fill_input_asset\": \"string\",\n      \"fill_output_asset\": \"string\",\n      \"fill_sender\": \"string\",\n      \"fill_status\": null,\n      \"fill_initiator\": \"string\",\n      \"fill_receiver\": \"string\",\n      \"max_fee\": \"string\"\n    },\n    {\n      \"intent_id\": \"string\",\n      \"queue_idx\": 1790,\n      \"message_id\": \"string\",\n      \"status\": \"SETTLED\",\n      \"receiver\": \"string\",\n      \"input_asset\": \"string\",\n      \"output_asset\": \"string\",\n      \"origin_amount\": \"string\",\n      \"origin\": \"string\",\n      \"destinations\": [\n        \"string\",\n        \"string\"\n      ],\n      \"nonce\": 894,\n      \"transaction_hash\": \"string\",\n      \"intent_created_timestamp\": 2854,\n      \"intent_created_block_number\": 4770,\n      \"tx_origin\": \"string\",\n      \"tx_nonce\": 1873,\n      \"auto_id\": 8631,\n      \"amount_out_min\": \"string\",\n      \"origin_gas_fees\": \"string\",\n      \"ttl\": null,\n      \"batch_id\": null,\n      \"destination_amount\": \"string\",\n      \"receive_tx_hash\": \"string\",\n      \"settlement_timestamp\": 28,\n      \"receive_blocknumber\": 3446,\n      \"call_data\": null,\n      \"filled\": true,\n      \"initiator\": \"string\",\n      \"native_fee\": \"string\",\n      \"token_fee\": \"string\",\n      \"fee_adapter_initiator\": null,\n      \"destination_gas_fees\": \"string\",\n      \"hub_settlement_domain\": null,\n      \"is_fast_path\": true,\n      \"fill_solver\": null,\n      \"fill_domain\": \"string\",\n      \"fill_destinations\": [\n        \"string\",\n        \"string\"\n      ],\n      \"fill_transaction_hash\": \"string\",\n      \"fill_timestamp\": null,\n      \"fill_amount\": null,\n      \"fill_fee_token\": null,\n      \"fill_fee_dbps\": \"string\",\n      \"fill_input_asset\": \"string\",\n      \"fill_output_asset\": \"string\",\n      \"fill_sender\": null,\n      \"fill_status\": \"string\",\n      \"fill_initiator\": \"string\",\n      \"fill_receiver\": null,\n      \"max_fee\": \"string\"\n    }\n  ],\n  \"token_fee\": \"string\",\n  \"native_fee\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0bc64f13-cb83-4d2f-8228-12fdbdddc813",
+              "name": "Invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batched-intents",
+                    ":batchId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "batchId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0b90cb2-3a38-4690-a706-a61d3dbe1d97",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batched-intents",
+                    ":batchId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "batchId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.testnet.everclear.org",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f6426831-acb3-4ca2-8dcd-0637fb3711cf",
+    "name": "Chimera Batched Intents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}
