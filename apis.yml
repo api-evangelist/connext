@@ -16,6 +16,17 @@ description: >-
   protocol is sunset, the API host no longer answers, and this profile is an archival record
   of the developer surface Everclear published.
 url: https://raw.githubusercontent.com/api-evangelist/connext/refs/heads/main/apis.yml
+deliveryModel:
+  model: unknown
+  open_source: false
+  commercial: false
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  generated: '2026-08-28'
+  method: derived
 image: https://raw.githubusercontent.com/everclearorg/brand/main/Everclear-Logo-Black.png
 x-type: company
 x-source: harvest:secondary-market
