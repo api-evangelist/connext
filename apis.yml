@@ -1,20 +1,17 @@
 aid: connext
 name: Everclear
-description: >-
-  Everclear (previously Connext) was a crosschain clearing layer for the intent economy. It
-  netted bidirectional rebalancing flows between solvers, fillers and bridges across chains
-  so that liquidity moved once instead of many times, cutting rebalancing cost by up to 10x.
-  Rebalancers deposited into a Spoke contract on any supported chain and named the
-  destination chains they wanted funds on; a Hub contract on the Everclear clearing chain
-  netted those intents against opposing flow, and any intent that could not be netted became
-  a discounted invoice that arbitrageurs could purchase — a dutch-auction style mechanism
-  that kept the system solvent without a central operator. Everclear shipped a public,
-  unauthenticated REST API ("Chimera API") that read indexed intents, invoices, supported
-  assets, route quotes and settlement history, and that built unsigned EVM, Solana and Tron
-  transactions for callers to sign with their own wallet. On 2026-05-21 the team announced
-  the protocol, the Everclear Foundation and the labs unit had all been wound down; the
-  protocol is sunset, the API host no longer answers, and this profile is an archival record
-  of the developer surface Everclear published.
+description: Everclear (previously Connext) was a crosschain clearing layer for the intent economy. It
+  netted bidirectional rebalancing flows between solvers, fillers and bridges across chains so that liquidity
+  moved once instead of many times, cutting rebalancing cost by up to 10x. Rebalancers deposited into
+  a Spoke contract on any supported chain and named the destination chains they wanted funds on; a Hub
+  contract on the Everclear clearing chain netted those intents against opposing flow, and any intent
+  that could not be netted became a discounted invoice that arbitrageurs could purchase — a dutch-auction
+  style mechanism that kept the system solvent without a central operator. Everclear shipped a public,
+  unauthenticated REST API ("Chimera API") that read indexed intents, invoices, supported assets, route
+  quotes and settlement history, and that built unsigned EVM, Solana and Tron transactions for callers
+  to sign with their own wallet. On 2026-05-21 the team announced the protocol, the Everclear Foundation
+  and the labs unit had all been wound down; the protocol is sunset, the API host no longer answers, and
+  this profile is an archival record of the developer surface Everclear published.
 url: https://raw.githubusercontent.com/api-evangelist/connext/refs/heads/main/apis.yml
 deliveryModel:
   model: unknown
@@ -45,7 +42,7 @@ x-type: company
 x-source: harvest:secondary-market
 specificationVersion: '0.23'
 created: '2026-08-09'
-modified: '2026-08-09'
+modified: '2026-09-15'
 tags:
 - Company
 - Blockchain
@@ -292,3 +289,4 @@ x-enrichment:
   status: enriched
   artifacts_added: 13
   pass: local-v1
+x-status: defunct
