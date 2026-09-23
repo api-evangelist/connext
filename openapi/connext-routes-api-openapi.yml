@@ -158,6 +158,8 @@ paths:
           description: Internal server error.
       tags:
       - Routes
+      operationId: postRoutesQuotes
+      x-operation-id-source: derived
   /routes/limits:
     post:
       summary: Get current limits for a route
@@ -200,3 +202,5 @@ paths:
           description: Internal server error.
       tags:
       - Routes
+      operationId: postRoutesLimits
+      x-operation-id-source: derived

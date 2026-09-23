@@ -67,6 +67,8 @@ paths:
                     type: string
       tags:
       - Configs
+      operationId: getConfigsAssets
+      x-operation-id-source: derived
 components:
   schemas:
     Asset:

@@ -107,6 +107,8 @@ paths:
                     type: string
       tags:
       - Invoices
+      operationId: getInvoices
+      x-operation-id-source: derived
   /invoices/{intentId}:
     get:
       summary: Return invoice details
@@ -152,6 +154,8 @@ paths:
                     type: string
       tags:
       - Invoices
+      operationId: getInvoicesByIntentId
+      x-operation-id-source: derived
   /invoices/{intentId}/min-amounts:
     get:
       summary: Calculate minimum amounts needed to settle invoice
@@ -222,6 +226,8 @@ paths:
                     type: string
       tags:
       - Invoices
+      operationId: getInvoicesByIntentIdMinAmounts
+      x-operation-id-source: derived
 components:
   schemas:
     IntentStatus:

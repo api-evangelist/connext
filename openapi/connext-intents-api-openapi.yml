@@ -64,6 +64,8 @@ paths:
                     type: string
       tags:
       - Intents
+      operationId: postIntents
+      x-operation-id-source: derived
     get:
       summary: Get intents
       description: Retrieves a paginated list of intents based on query parameters
@@ -197,6 +199,8 @@ paths:
                     type: string
       tags:
       - Intents
+      operationId: getIntents
+      x-operation-id-source: derived
   /intents/{intentId}:
     get:
       summary: Get intent details
@@ -244,6 +248,8 @@ paths:
                     type: string
       tags:
       - Intents
+      operationId: getIntentsByIntentId
+      x-operation-id-source: derived
   /intents/{intentId}/execute:
     post:
       summary: Execute calldata
@@ -298,6 +304,8 @@ paths:
                     type: string
       tags:
       - Intents
+      operationId: postIntentsByIntentIdExecute
+      x-operation-id-source: derived
   /intents/{intentId}/return-unsupported:
     post:
       summary: Return unsupported intent
@@ -340,76 +348,68 @@ paths:
                     type: string
       tags:
       - Intents
+      operationId: postIntentsByIntentIdReturnUnsupported
+      x-operation-id-source: derived
 components:
   schemas:
-    TransactionRequest:
+    IntentRequest:
       type: object
-      properties:
-        to:
-          type:
-          - string
-          - 'null'
-        from:
-          type:
-          - string
-          - 'null'
-        nonce:
-          type: string
-          format: bigint
-        gasLimit:
-          type: string
-          format: bigint
-        gasPrice:
-          type: string
-          format: bigint
-        data:
-          type: string
-          format: byte
-        value:
-          type: string
-          format: bigint
-        chainId:
-          type: integer
-        type:
-          type:
-          - integer
-          - 'null'
-        accessList:
-          type:
-          - array
-          - 'null'
-          items:
-            type: object
-            properties:
-              address:
-                type: string
-              storageKeys:
-                type: array
-                items:
-                  type: string
-        maxPriorityFeePerGas:
-          type:
-          - string
-          - 'null'
-          format: bigint
-        maxFeePerGas:
-          type:
-          - string
-          - 'null'
-          format: bigint
-        customData:
-          type:
-          - object
-          - 'null'
-          additionalProperties: true
-        ccipReadEnabled:
-          type:
-          - boolean
-          - 'null'
       required:
+      - origin
+      - destinations
       - to
-      - data
-      - chainId
+      - inputAsset
+      - amount
+      - callData
+      properties:
+        origin:
+          type: string
+        destinations:
+          type: array
+          items:
+            type: string
+        to:
+          type: string
+        from:
+          type: string
+          description: intent creator address
+        inputAsset:
+          type: string
+        outputAsset:
+          type: string
+        amount:
+          type: string
+          format: bigint
+          description: Input asset amount, denominated in the asset's decimal units on the origin chain
+        callData:
+          type: string
+        ttl:
+          type: integer
+          description: Time-to-live in seconds for fast-path execution (optional)
+        max_fee:
+          type: string
+          description: Max Fees used in intent system (depricated after swaps)
+        permit2Params:
+          type: object
+          properties:
+            nonce:
+              type: string
+              format: bigint
+            deadline:
+              type: string
+              format: bigint
+            signature:
+              type: string
+          required:
+          - nonce
+          - deadline
+          - signature
+        order_id:
+          type: string
+          description: Order ID for newOrder requests
+        isFastPath:
+          type: boolean
+          description: Boolean for sending intent through fast path
     Intent:
       type: object
       properties:
@@ -670,61 +670,71 @@ components:
       - DISPATCHED_HUB
       - DISPATCHED_SPOKE
       - DISPATCHED_UNSUPPORTED
-    IntentRequest:
+    TransactionRequest:
       type: object
-      required:
-      - origin
-      - destinations
-      - to
-      - inputAsset
-      - amount
-      - callData
       properties:
-        origin:
-          type: string
-        destinations:
-          type: array
-          items:
-            type: string
         to:
-          type: string
+          type:
+          - string
+          - 'null'
         from:
-          type: string
-          description: intent creator address
-        inputAsset:
-          type: string
-        outputAsset:
-          type: string
-        amount:
+          type:
+          - string
+          - 'null'
+        nonce:
           type: string
           format: bigint
-          description: Input asset amount, denominated in the asset's decimal units on the origin chain
-        callData:
+        gasLimit:
           type: string
-        ttl:
+          format: bigint
+        gasPrice:
+          type: string
+          format: bigint
+        data:
+          type: string
+          format: byte
+        value:
+          type: string
+          format: bigint
+        chainId:
           type: integer
-          description: Time-to-live in seconds for fast-path execution (optional)
-        max_fee:
-          type: string
-          description: Max Fees used in intent system (depricated after swaps)
-        permit2Params:
-          type: object
-          properties:
-            nonce:
-              type: string
-              format: bigint
-            deadline:
-              type: string
-              format: bigint
-            signature:
-              type: string
-          required:
-          - nonce
-          - deadline
-          - signature
-        order_id:
-          type: string
-          description: Order ID for newOrder requests
-        isFastPath:
-          type: boolean
-          description: Boolean for sending intent through fast path
+        type:
+          type:
+          - integer
+          - 'null'
+        accessList:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            properties:
+              address:
+                type: string
+              storageKeys:
+                type: array
+                items:
+                  type: string
+        maxPriorityFeePerGas:
+          type:
+          - string
+          - 'null'
+          format: bigint
+        maxFeePerGas:
+          type:
+          - string
+          - 'null'
+          format: bigint
+        customData:
+          type:
+          - object
+          - 'null'
+          additionalProperties: true
+        ccipReadEnabled:
+          type:
+          - boolean
+          - 'null'
+      required:
+      - to
+      - data
+      - chainId

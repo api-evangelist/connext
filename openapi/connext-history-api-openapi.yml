@@ -101,3 +101,5 @@ paths:
           description: Internal server error.
       tags:
       - History
+      operationId: getHistoryByIntentIdInvoiceProcessing
+      x-operation-id-source: derived
