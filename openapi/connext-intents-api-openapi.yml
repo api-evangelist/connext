@@ -352,6 +352,74 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    TransactionRequest:
+      type: object
+      properties:
+        to:
+          type:
+          - string
+          - 'null'
+        from:
+          type:
+          - string
+          - 'null'
+        nonce:
+          type: string
+          format: bigint
+        gasLimit:
+          type: string
+          format: bigint
+        gasPrice:
+          type: string
+          format: bigint
+        data:
+          type: string
+          format: byte
+        value:
+          type: string
+          format: bigint
+        chainId:
+          type: integer
+        type:
+          type:
+          - integer
+          - 'null'
+        accessList:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            properties:
+              address:
+                type: string
+              storageKeys:
+                type: array
+                items:
+                  type: string
+        maxPriorityFeePerGas:
+          type:
+          - string
+          - 'null'
+          format: bigint
+        maxFeePerGas:
+          type:
+          - string
+          - 'null'
+          format: bigint
+        customData:
+          type:
+          - object
+          - 'null'
+          additionalProperties: true
+        ccipReadEnabled:
+          type:
+          - boolean
+          - 'null'
+      required:
+      - to
+      - data
+      - chainId
     IntentRequest:
       type: object
       required:
@@ -670,71 +738,3 @@ components:
       - DISPATCHED_HUB
       - DISPATCHED_SPOKE
       - DISPATCHED_UNSUPPORTED
-    TransactionRequest:
-      type: object
-      properties:
-        to:
-          type:
-          - string
-          - 'null'
-        from:
-          type:
-          - string
-          - 'null'
-        nonce:
-          type: string
-          format: bigint
-        gasLimit:
-          type: string
-          format: bigint
-        gasPrice:
-          type: string
-          format: bigint
-        data:
-          type: string
-          format: byte
-        value:
-          type: string
-          format: bigint
-        chainId:
-          type: integer
-        type:
-          type:
-          - integer
-          - 'null'
-        accessList:
-          type:
-          - array
-          - 'null'
-          items:
-            type: object
-            properties:
-              address:
-                type: string
-              storageKeys:
-                type: array
-                items:
-                  type: string
-        maxPriorityFeePerGas:
-          type:
-          - string
-          - 'null'
-          format: bigint
-        maxFeePerGas:
-          type:
-          - string
-          - 'null'
-          format: bigint
-        customData:
-          type:
-          - object
-          - 'null'
-          additionalProperties: true
-        ccipReadEnabled:
-          type:
-          - boolean
-          - 'null'
-      required:
-      - to
-      - data
-      - chainId

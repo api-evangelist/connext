@@ -230,25 +230,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    IntentStatus:
-      type: string
-      enum:
-      - NONE
-      - ADDED
-      - ADDED_SPOKE
-      - ADDED_HUB
-      - DEPOSIT_PROCESSED
-      - FILLED
-      - ADDED_AND_FILLED
-      - INVOICED
-      - SETTLED
-      - SETTLED_AND_COMPLETED
-      - SETTLED_AND_MANUALLY_EXECUTED
-      - UNSUPPORTED
-      - UNSUPPORTED_RETURNED
-      - DISPATCHED_HUB
-      - DISPATCHED_SPOKE
-      - DISPATCHED_UNSUPPORTED
     Invoice:
       type: object
       required:
@@ -293,3 +274,22 @@ components:
           type: string
         hub_invoice_enqueued_timestamp:
           type: string
+    IntentStatus:
+      type: string
+      enum:
+      - NONE
+      - ADDED
+      - ADDED_SPOKE
+      - ADDED_HUB
+      - DEPOSIT_PROCESSED
+      - FILLED
+      - ADDED_AND_FILLED
+      - INVOICED
+      - SETTLED
+      - SETTLED_AND_COMPLETED
+      - SETTLED_AND_MANUALLY_EXECUTED
+      - UNSUPPORTED
+      - UNSUPPORTED_RETURNED
+      - DISPATCHED_HUB
+      - DISPATCHED_SPOKE
+      - DISPATCHED_UNSUPPORTED
