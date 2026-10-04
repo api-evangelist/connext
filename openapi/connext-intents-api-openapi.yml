@@ -352,64 +352,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    IntentRequest:
-      type: object
-      required:
-      - origin
-      - destinations
-      - to
-      - inputAsset
-      - amount
-      - callData
-      properties:
-        origin:
-          type: string
-        destinations:
-          type: array
-          items:
-            type: string
-        to:
-          type: string
-        from:
-          type: string
-          description: intent creator address
-        inputAsset:
-          type: string
-        outputAsset:
-          type: string
-        amount:
-          type: string
-          format: bigint
-          description: Input asset amount, denominated in the asset's decimal units on the origin chain
-        callData:
-          type: string
-        ttl:
-          type: integer
-          description: Time-to-live in seconds for fast-path execution (optional)
-        max_fee:
-          type: string
-          description: Max Fees used in intent system (depricated after swaps)
-        permit2Params:
-          type: object
-          properties:
-            nonce:
-              type: string
-              format: bigint
-            deadline:
-              type: string
-              format: bigint
-            signature:
-              type: string
-          required:
-          - nonce
-          - deadline
-          - signature
-        order_id:
-          type: string
-          description: Order ID for newOrder requests
-        isFastPath:
-          type: boolean
-          description: Boolean for sending intent through fast path
     TransactionRequest:
       type: object
       properties:
@@ -478,6 +420,64 @@ components:
       - to
       - data
       - chainId
+    IntentRequest:
+      type: object
+      required:
+      - origin
+      - destinations
+      - to
+      - inputAsset
+      - amount
+      - callData
+      properties:
+        origin:
+          type: string
+        destinations:
+          type: array
+          items:
+            type: string
+        to:
+          type: string
+        from:
+          type: string
+          description: intent creator address
+        inputAsset:
+          type: string
+        outputAsset:
+          type: string
+        amount:
+          type: string
+          format: bigint
+          description: Input asset amount, denominated in the asset's decimal units on the origin chain
+        callData:
+          type: string
+        ttl:
+          type: integer
+          description: Time-to-live in seconds for fast-path execution (optional)
+        max_fee:
+          type: string
+          description: Max Fees used in intent system (depricated after swaps)
+        permit2Params:
+          type: object
+          properties:
+            nonce:
+              type: string
+              format: bigint
+            deadline:
+              type: string
+              format: bigint
+            signature:
+              type: string
+          required:
+          - nonce
+          - deadline
+          - signature
+        order_id:
+          type: string
+          description: Order ID for newOrder requests
+        isFastPath:
+          type: boolean
+          description: Boolean for sending intent through fast path
     IntentStatus:
       type: string
       enum:
