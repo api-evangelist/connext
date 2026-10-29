@@ -64,5 +64,81 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Everclear is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://forgeglobal.com/connext_stock/
+> **No longer operating.** This company or product has shut down, been discontinued, or been deprecated. This profile is kept as a historical record and is not maintained or rated.
+
+Everclear (previously Connext) was a crosschain clearing layer for the intent economy. It netted bidirectional rebalancing flows between solvers, fillers and bridges across chains so that liquidity moved once instead of many times, cutting rebalancing cost by up to 10x. Rebalancers deposited into a Spoke contract on any supported chain and named the destination chains they wanted funds on; a Hub contract on the Everclear clearing chain netted those intents against opposing flow, and any intent that could not be netted became a discounted invoice that arbitrageurs could purchase — a dutch-auction style mechanism that kept the system solvent without a central operator. Everclear shipped a public, unauthenticated REST API ("Chimera API") that read indexed intents, invoices, supported assets, route quotes and settlement history, and that built unsigned EVM, Solana and Tron transactions for callers to sign with their own wallet. On 2026-05-21 the team announced the protocol, the Everclear Foundation and the labs unit had all been wound down; the protocol is sunset, the API host no longer answers, and this profile is an archival record of the developer surface Everclear published.
+
+**Areas:** Company · Blockchain · Cryptocurrency · Web3 · Interoperability · Cross-Chain · Bridging · Settlement · Liquidity · Intents · DeFi · Chain Abstraction
+
+## Everclear on APIs.io (historical record)
+
+Everything profiled for Everclear is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/connext/](https://apis.io/providers/connext/)** — or go straight to one of the APIs or properties below.
+
+### APIs (8)
+
+- [Everclear Batched Intents API](https://apis.io/apis/connext/connext-batched-intents-api/) — The Batched Intents API from Everclear — 2 operation(s) for batched intents.
+- [Everclear Configs API](https://apis.io/apis/connext/connext-configs-api/) — The Configs API from Everclear — 1 operation(s) for configs.
+- [Everclear History API](https://apis.io/apis/connext/connext-history-api/) — The History API from Everclear — 1 operation(s) for history.
+- [Everclear Intents API](https://apis.io/apis/connext/connext-intents-api/) — The Intents API from Everclear — 4 operation(s) for intents.
+- [Everclear Invoices API](https://apis.io/apis/connext/connext-invoices-api/) — The Invoices API from Everclear — 3 operation(s) for invoices.
+- [Everclear Routes API](https://apis.io/apis/connext/connext-routes-api/) — The Routes API from Everclear — 2 operation(s) for routes.
+- [Everclear Solana API](https://apis.io/apis/connext/connext-solana-api/) — The Solana API from Everclear — 2 operation(s) for solana.
+- [Everclear Tron API](https://apis.io/apis/connext/connext-tron-api/) — The Tron API from Everclear — 1 operation(s) for tron.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Collections (8)
+
+Postman and Open Collection request collections.
+
+- [Chimera Batched Intents API](https://apis.io/collections/connext/open-connext-batched-intents-api/)
+- [Chimera Configs API](https://apis.io/collections/connext/open-connext-configs-api/)
+- [Chimera History API](https://apis.io/collections/connext/open-connext-history-api/)
+- [Chimera Intents API](https://apis.io/collections/connext/open-connext-intents-api/)
+- [Chimera Invoices API](https://apis.io/collections/connext/open-connext-invoices-api/)
+- [Chimera Routes API](https://apis.io/collections/connext/open-connext-routes-api/)
+- [Chimera Solana API](https://apis.io/collections/connext/open-connext-solana-api/)
+- [Chimera Tron API](https://apis.io/collections/connext/open-connext-tron-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Connext Everclear Overlay](https://apis.io/overlays/connext/connext-everclear-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Connext Authentication](https://apis.io/security/connext/connext-authentication/)
+- [Connext Domain Security](https://apis.io/security/connext/connext-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.connext.network/)
+- [Documentation](https://docs.everclear.org/)
+- [Getting started](https://docs.everclear.org/developers/getting-started)
+- [API reference](https://docs.everclear.org/developers/api)
+- [Support](https://www.connext.network/support)
+- [Blog](https://blog.connext.network/)
+- [GitHub](https://github.com/everclearorg)
+
+## API Evangelist rating
+
+**Not rated** — this company is recorded as no longer operating, so no score is published. If it is in fact operating, say so on this repository and it will be re-profiled.
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Everclear: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/connext/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
